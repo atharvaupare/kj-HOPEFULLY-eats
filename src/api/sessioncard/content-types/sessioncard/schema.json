@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sessioncards",
+  "info": {
+    "singularName": "sessioncard",
+    "pluralName": "sessioncards",
+    "displayName": "sessioncard"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "displayimage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "profileimg": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "facilitator": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}

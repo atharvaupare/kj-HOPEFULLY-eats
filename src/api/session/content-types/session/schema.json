@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sessions",
+  "info": {
+    "singularName": "session",
+    "pluralName": "sessions",
+    "displayName": "sessions",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "sessiontime": {
+      "type": "string"
+    },
+    "sessionamount": {
+      "type": "string"
+    },
+    "sessionaplatform": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "Facilitator": {
+      "type": "string"
+    },
+    "keyfeatures": {
+      "type": "text"
+    },
+    "whocanbenefit": {
+      "type": "text"
+    }
+  }
+}
