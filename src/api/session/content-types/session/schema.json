@@ -31,14 +31,30 @@
       "component": "info.info"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "string"
+    },
+    "facilitator": {
+      "type": "string"
+    },
+    "tag": {
+      "displayName": "tags",
+      "type": "component",
+      "repeatable": false,
+      "component": "tags.tags"
     }
   }
 }

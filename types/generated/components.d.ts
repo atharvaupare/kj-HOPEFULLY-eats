@@ -56,6 +56,18 @@ export interface MainMain extends Schema.Component {
   };
 }
 
+export interface TagsTags extends Schema.Component {
+  collectionName: 'components_tags_tags';
+  info: {
+    displayName: 'tags';
+  };
+  attributes: {
+    time: Attribute.Time;
+    price: Attribute.String;
+    link: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -64,6 +76,7 @@ declare module '@strapi/types' {
       'displayview.displayview': DisplayviewDisplayview;
       'info.info': InfoInfo;
       'main.main': MainMain;
+      'tags.tags': TagsTags;
     }
   }
 }

@@ -840,6 +840,10 @@ export interface ApiSessionSession extends Schema.CollectionType {
     whocanbenefit: Attribute.Text;
     info: Attribute.Component<'info.info', true>;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    date: Attribute.Date;
+    time: Attribute.String;
+    facilitator: Attribute.String;
+    tag: Attribute.Component<'tags.tags'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

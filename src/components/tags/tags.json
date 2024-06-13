@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_tags_tags",
+  "info": {
+    "displayName": "tags"
+  },
+  "options": {},
+  "attributes": {
+    "time": {
+      "type": "time"
+    },
+    "price": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}
