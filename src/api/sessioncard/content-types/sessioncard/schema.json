@@ -4,41 +4,28 @@
   "info": {
     "singularName": "sessioncard",
     "pluralName": "sessioncards",
-    "displayName": "sessioncard"
+    "displayName": "sessioncard",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "displayimage": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
+    "displayview": {
+      "displayName": "displayview",
+      "type": "component",
+      "repeatable": true,
+      "component": "displayview.displayview"
     },
-    "profileimg": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
+    "main": {
+      "displayName": "main",
+      "type": "component",
+      "repeatable": true,
+      "component": "main.main"
     },
-    "facilitator": {
+    "title": {
       "type": "string"
-    },
-    "Title": {
-      "type": "string"
-    },
-    "date": {
-      "type": "date"
     }
   }
 }

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_info_infos",
+  "info": {
+    "displayName": "info"
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "timings": {
+      "type": "json"
+    },
+    "counsellername": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "decimal"
+    },
+    "price": {
+      "type": "biginteger"
+    }
+  }
+}

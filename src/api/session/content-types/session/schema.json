@@ -15,29 +15,20 @@
     "title": {
       "type": "string"
     },
-    "sessiontime": {
-      "type": "string"
-    },
-    "sessionamount": {
-      "type": "string"
-    },
-    "sessionaplatform": {
-      "type": "string"
-    },
     "description": {
       "type": "text"
-    },
-    "date": {
-      "type": "datetime"
-    },
-    "Facilitator": {
-      "type": "string"
     },
     "keyfeatures": {
       "type": "text"
     },
     "whocanbenefit": {
       "type": "text"
+    },
+    "info": {
+      "displayName": "info",
+      "type": "component",
+      "repeatable": true,
+      "component": "info.info"
     }
   }
 }

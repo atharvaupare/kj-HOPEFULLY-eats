@@ -835,14 +835,10 @@ export interface ApiSessionSession extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    sessiontime: Attribute.String;
-    sessionamount: Attribute.String;
-    sessionaplatform: Attribute.String;
     description: Attribute.Text;
-    date: Attribute.DateTime;
-    Facilitator: Attribute.String;
     keyfeatures: Attribute.Text;
     whocanbenefit: Attribute.Text;
+    info: Attribute.Component<'info.info', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -867,16 +863,15 @@ export interface ApiSessioncardSessioncard extends Schema.CollectionType {
     singularName: 'sessioncard';
     pluralName: 'sessioncards';
     displayName: 'sessioncard';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    displayimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    profileimg: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    facilitator: Attribute.String;
-    Title: Attribute.String;
-    date: Attribute.Date;
+    displayview: Attribute.Component<'displayview.displayview', true>;
+    main: Attribute.Component<'main.main', true>;
+    title: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
