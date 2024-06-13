@@ -12,19 +12,33 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "displayview": {
-      "displayName": "displayview",
-      "type": "component",
-      "repeatable": true,
-      "component": "displayview.displayview"
-    },
-    "main": {
-      "displayName": "main",
-      "type": "component",
-      "repeatable": true,
-      "component": "main.main"
-    },
     "title": {
+      "type": "string"
+    },
+    "cardimage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "date": {
+      "type": "date"
+    },
+    "profileimg": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "facilitator": {
       "type": "string"
     }
   }

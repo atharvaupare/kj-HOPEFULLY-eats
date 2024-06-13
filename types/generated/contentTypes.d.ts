@@ -839,6 +839,7 @@ export interface ApiSessionSession extends Schema.CollectionType {
     keyfeatures: Attribute.Text;
     whocanbenefit: Attribute.Text;
     info: Attribute.Component<'info.info', true>;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -869,9 +870,11 @@ export interface ApiSessioncardSessioncard extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    displayview: Attribute.Component<'displayview.displayview', true>;
-    main: Attribute.Component<'main.main', true>;
     title: Attribute.String;
+    cardimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    date: Attribute.Date;
+    profileimg: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    facilitator: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
