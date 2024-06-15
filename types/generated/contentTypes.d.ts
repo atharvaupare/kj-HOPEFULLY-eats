@@ -362,115 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiGroupsessionGroupsession extends Schema.CollectionType {
-  collectionName: 'groupsessions';
-  info: {
-    singularName: 'groupsession';
-    pluralName: 'groupsessions';
-    displayName: 'groupsession';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    Title: Attribute.String;
-    for: Attribute.String;
-    description: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::groupsession.groupsession',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::groupsession.groupsession',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSessionSession extends Schema.CollectionType {
-  collectionName: 'sessions';
-  info: {
-    singularName: 'session';
-    pluralName: 'sessions';
-    displayName: 'sessions';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    keyfeatures: Attribute.Text;
-    whocanbenefit: Attribute.Text;
-    info: Attribute.Component<'info.info', true>;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    date: Attribute.Date;
-    time: Attribute.String;
-    facilitator: Attribute.String;
-    tag: Attribute.Component<'tags.tags'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::session.session',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::session.session',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSessioncardSessioncard extends Schema.CollectionType {
-  collectionName: 'sessioncards';
-  info: {
-    singularName: 'sessioncard';
-    pluralName: 'sessioncards';
-    displayName: 'sessioncard';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    cardimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    date: Attribute.Date;
-    profileimg: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    facilitator: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::sessioncard.sessioncard',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::sessioncard.sessioncard',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -897,6 +788,115 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiGroupsessionGroupsession extends Schema.CollectionType {
+  collectionName: 'groupsessions';
+  info: {
+    singularName: 'groupsession';
+    pluralName: 'groupsessions';
+    displayName: 'groupsession';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Title: Attribute.String;
+    for: Attribute.String;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::groupsession.groupsession',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::groupsession.groupsession',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSessionSession extends Schema.CollectionType {
+  collectionName: 'sessions';
+  info: {
+    singularName: 'session';
+    pluralName: 'sessions';
+    displayName: 'sessions';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    keyfeatures: Attribute.Text;
+    whocanbenefit: Attribute.Text;
+    info: Attribute.Component<'info.info', true>;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    date: Attribute.Date;
+    time: Attribute.String;
+    facilitator: Attribute.String;
+    tag: Attribute.Component<'tags.tags'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::session.session',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::session.session',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSessioncardSessioncard extends Schema.CollectionType {
+  collectionName: 'sessioncards';
+  info: {
+    singularName: 'sessioncard';
+    pluralName: 'sessioncards';
+    displayName: 'sessioncard';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    cardimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    date: Attribute.Date;
+    profileimg: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    facilitator: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sessioncard.sessioncard',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sessioncard.sessioncard',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -907,9 +907,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::groupsession.groupsession': ApiGroupsessionGroupsession;
-      'api::session.session': ApiSessionSession;
-      'api::sessioncard.sessioncard': ApiSessioncardSessioncard;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -918,6 +915,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::groupsession.groupsession': ApiGroupsessionGroupsession;
+      'api::session.session': ApiSessionSession;
+      'api::sessioncard.sessioncard': ApiSessioncardSessioncard;
     }
   }
 }
