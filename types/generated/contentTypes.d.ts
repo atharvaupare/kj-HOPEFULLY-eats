@@ -804,6 +804,7 @@ export interface ApiGroupsessionGroupsession extends Schema.CollectionType {
     Title: Attribute.String;
     for: Attribute.String;
     description: Attribute.Text;
+    sessioncard: Attribute.Component<'sessioncard.sessioncard', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
