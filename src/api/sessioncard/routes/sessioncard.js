@@ -23,6 +23,16 @@ module.exports = {
       },
     },
     {
+        method: "GET",
+        path: "/sessioncards/:id",
+        handler: "sessioncard.findById",
+        config: {
+          auth: false,
+          policies: [],
+          middlewares: [],
+        },
+      },
+    {
       method: "GET",
       path: "/sessioncards/:slug",
       handler: "sessioncard.findBySlug",

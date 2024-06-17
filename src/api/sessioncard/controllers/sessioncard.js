@@ -37,5 +37,24 @@ module.exports = createCoreController(
 
       return this.transformResponse(sanitizedEntity);
     },
+
+    async findById(ctx) {
+      const { id } = ctx.params;
+
+      const entity = await strapi.db
+        .query("api::sessioncard.sessioncard")
+        .findOne({
+          where: { id: id },
+          populate: true,
+        });
+
+      if (!entity) {
+        return ctx.notFound();
+      }
+
+      const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
+      return this.transformResponse(sanitizedEntity);
+    },
   })
 );
