@@ -882,6 +882,9 @@ export interface ApiSessioncardSessioncard extends Schema.CollectionType {
     facilitator: Attribute.String;
     info: Attribute.Component<'info.info', true>;
     slug: Attribute.UID<'api::sessioncard.sessioncard', 'title'>;
+    keyfeatures: Attribute.Component<'sessioncard.keyfeatures', true>;
+    beneficiaries: Attribute.Component<'sessioncard.beneficiaries', true>;
+    cancellationpolicy: Attribute.Component<'sessioncard.cancellationpolicy'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
