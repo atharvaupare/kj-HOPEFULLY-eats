@@ -37,6 +37,11 @@
       "type": "component",
       "repeatable": true,
       "component": "sessioncard.sessioncard"
+    },
+    "isavailable": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

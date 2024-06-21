@@ -805,6 +805,9 @@ export interface ApiGroupsessionGroupsession extends Schema.CollectionType {
     for: Attribute.String;
     description: Attribute.Text;
     sessioncard: Attribute.Component<'sessioncard.sessioncard', true>;
+    isavailable: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -885,6 +888,8 @@ export interface ApiSessioncardSessioncard extends Schema.CollectionType {
     keyfeatures: Attribute.Component<'sessioncard.keyfeatures', true>;
     beneficiaries: Attribute.Component<'sessioncard.beneficiaries', true>;
     cancellationpolicy: Attribute.Component<'sessioncard.cancellationpolicy'>;
+    for: Attribute.Enumeration<['College Students', 'High School Students']> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -66,6 +66,14 @@
       "type": "component",
       "repeatable": false,
       "component": "sessioncard.cancellationpolicy"
+    },
+    "for": {
+      "type": "enumeration",
+      "enum": [
+        "College Students",
+        "High School Students"
+      ],
+      "required": true
     }
   }
 }
