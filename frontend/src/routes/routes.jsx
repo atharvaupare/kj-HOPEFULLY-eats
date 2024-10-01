@@ -1,6 +1,8 @@
 import Landing from "../pages/Landing";
 import HomePage from "../pages/HomePage"
 import MainMenu from "../pages/MainMenu";
+import ProductPage from "../pages/ProductPage";
+import CartPage from "../pages/CartPage";
 
 const routes = [
   {
@@ -14,8 +16,16 @@ const routes = [
       {
         path: "",
         element: <MainMenu />, 
+      },
+      {
+        path: "cart",
+        element: <CartPage />, 
       }
     ],
+  },
+  {
+    path: "/item",
+    element: <ProductPage />,
   },
 ];
 
