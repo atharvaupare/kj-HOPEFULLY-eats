@@ -8,9 +8,9 @@ const ProductPage = () => {
   const [counter, setCounter] = useState(1);
   return (
     <div className="w-screen h-screen bg-gradient-to-b from-[#462B9C] to-[#644AB5] flex flex-col items-center gap-10 overflow-hidden">
-      <NavLink to="/homepage" className="ml-5 mt-10 self-start">
+      <NavLink to="/homepage" className="ml-5 mt-5 self-start">
         <ArrowBackIosNewOutlinedIcon
-          sx={{ color: "white", fontSize: 40 }}
+          sx={{ color: "white", fontSize: 20 }}
         />
       </NavLink>
 
