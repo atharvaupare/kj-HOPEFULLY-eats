@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Landing = () => {
   return (
     <div className="w-screen h-[100vh] bg-gradient-to-b from-[#462b9c] to-[#644ab5] flex justify-center items-center overflow-hidden">
-      <div className="h-[50vh] md:h-[60vh] w-[90vw] flex flex-col justify-between items-center">
+      <div className="h-[60vh] md:h-[60vh] w-[90vw] flex flex-col justify-between items-center">
         <div className="size-[240px] rounded-full overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
           <img
             src="https://img.freepik.com/free-photo/delicious-burger-with-fresh-ingredients_23-2150857908.jpg"
