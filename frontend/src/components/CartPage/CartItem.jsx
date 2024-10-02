@@ -6,7 +6,8 @@ import loremPicsum from "lorem-picsum";
 import { useContext, useState } from "react";
 import cartContext from "../../context/cartContext";
 
-const CartItem = ({ name, price, quantity }) => {
+const CartItem = ({ name, price, quantity, image }) => {
+  console.log(image);
   const { addItem } = useContext(cartContext);
   const [count, setCount] = useState(quantity);
 
@@ -38,7 +39,7 @@ const CartItem = ({ name, price, quantity }) => {
     <div className="w-full mb-5 h-[150px] flex justify-between items-center">
       <div className="flex gap-3">
         <div className="w-[100px] h-[150px] bg-[#EFEEEE] flex justify-center items-center">
-          <img src={loremPicsum({ width: 90, height: 120 })} alt="" />
+          <img src={image} alt="" />
         </div>
         <div className="flex flex-col justify-center gap-3 items-center">
           <span>{name}</span>

@@ -8,10 +8,14 @@ import cartContext from "../context/cartContext";
 
 const CartPage = () => {
   const { items } = useContext(cartContext);
+  console.log(items);
   const navigate = useNavigate();
 
   // Calculate the item total using reduce
-  const itemTotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const itemTotal = items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
   const tax = itemTotal * 0.1;
   const total = itemTotal + tax;
 
@@ -31,7 +35,13 @@ const CartPage = () => {
       ) : (
         <div className="w-full flex flex-col items-center p-5">
           {items.map((item, key) => (
-            <CartItem name={item.name} price={item.price} quantity={item.quantity} key={key} />
+            <CartItem
+              name={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              key={key}
+              image={item.image}
+            />
           ))}
 
           <div className="flex flex-col items-center w-full">
