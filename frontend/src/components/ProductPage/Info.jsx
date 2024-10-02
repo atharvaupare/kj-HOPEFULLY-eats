@@ -8,12 +8,15 @@ import cartContext from "../../context/cartContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Info = ({ counter, setCounter, price, name }) => {
+const Info = ({ counter, setCounter, price, name, image, description }) => {
   const { addItem } = useContext(cartContext);
   const navigate = useNavigate();
 
+  // console.log(image);
+
   function handleCartAddition() {
-    addItem((prev) => [...prev, { name, price, quantity: counter }]);
+    console.log(image);
+    addItem((prev) => [...prev, { name, price, quantity: counter, image }]);
     navigate("/homepage");
   }
 
@@ -50,7 +53,7 @@ const Info = ({ counter, setCounter, price, name }) => {
       </div>
 
       <div className="ml-5 text-sm text-[#595959]">
-        <span>Your desi tasty vada pav</span>
+        <span>{description}</span>
       </div>
 
       <div className="ml-5 mt-5 flex flex-col">
