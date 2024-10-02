@@ -11,30 +11,30 @@ const BottomNav = () => {
     <div className="bg-white w-screen h-[75px] flex justify-evenly items-center fixed bottom-0">
       <NavLink to="/homepage">
         {location.pathname == "/homepage" ? (
-          <HomeIcon sx={{ fontSize: 34, color: "#462B9C" }} />
+          <HomeIcon sx={{ fontSize: 30, color: "#462B9C" }} />
         ) : (
-          <HomeIcon sx={{ fontSize: 34, color: "#9D9C9C" }} />
+          <HomeIcon sx={{ fontSize: 30, color: "#9D9C9C" }} />
         )}
       </NavLink>
       <NavLink>
         {location.pathname == "/homepage/search" ? (
-          <SearchIcon sx={{ fontSize: 34, color: "#462B9C" }} />
+          <SearchIcon sx={{ fontSize: 30, color: "#462B9C" }} />
         ) : (
-          <SearchIcon sx={{ fontSize: 34, color: "#9D9C9C" }} />
+          <SearchIcon sx={{ fontSize: 30, color: "#9D9C9C" }} />
         )}
       </NavLink>
       <NavLink to="/homepage/cart">
         {location.pathname == "/homepage/cart" ? (
-          <ShoppingCartOutlinedIcon sx={{ fontSize: 34, color: "#462B9C" }} />
+          <ShoppingCartOutlinedIcon sx={{ fontSize: 30, color: "#462B9C" }} />
         ) : (
-          <ShoppingCartOutlinedIcon sx={{ fontSize: 34, color: "#9D9C9C" }} />
+          <ShoppingCartOutlinedIcon sx={{ fontSize: 30, color: "#9D9C9C" }} />
         )}
       </NavLink>
-      <NavLink>
+      <NavLink to='/homepage/profile'>
         {location.pathname == "/homepage/profile" ? (
-          <PersonOutlinedIcon sx={{ fontSize: 34, color: "#462B9C" }} />
+          <PersonOutlinedIcon sx={{ fontSize: 32, color: "#462B9C" }} />
         ) : (
-          <PersonOutlinedIcon sx={{ fontSize: 34, color: "#9D9C9C" }} />
+          <PersonOutlinedIcon sx={{ fontSize: 32, color: "#9D9C9C" }} />
         )}
       </NavLink>
     </div>

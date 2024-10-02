@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage"
 import MainMenu from "../pages/MainMenu";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
+import ProfilePage from "../pages/ProfilePage";
 
 const routes = [
   {
@@ -16,6 +17,10 @@ const routes = [
       {
         path: "",
         element: <MainMenu />, 
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />, 
       },
       {
         path: "cart",
