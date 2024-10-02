@@ -3,10 +3,36 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 import loremPicsum from "lorem-picsum";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import cartContext from "../../context/cartContext";
 
-const CartItem = ({ name, price }) => {
-    const [counter, setCounter] = useState(1);
+const CartItem = ({ name, price, quantity }) => {
+  const { addItem } = useContext(cartContext);
+  const [count, setCount] = useState(quantity);
+
+  function handleQuantityRemoval() {
+    const updatedCount = count - 1;
+    setCount(updatedCount);
+    addItem((prev) =>
+      prev.map((item) =>
+        item.name === name ? { ...item, quantity: updatedCount } : item
+      )
+    );
+  }
+
+  function handleQuantityAddition() {
+    const updatedCount = count + 1;
+    setCount(updatedCount);
+    addItem((prev) =>
+      prev.map((item) =>
+        item.name === name ? { ...item, quantity: updatedCount } : item
+      )
+    );
+  }
+
+  function handleDelete() {
+    addItem((prev) => prev.filter((item) => item.name !== name));
+  }
 
   return (
     <div className="w-full mb-5 h-[150px] flex justify-between items-center">
@@ -20,22 +46,19 @@ const CartItem = ({ name, price }) => {
           <div className="w-fit p-2 h-fit flex gap-3 justify-center items-center">
             <RemoveCircleOutlineOutlinedIcon
               sx={{ color: "#472C9D", fontSize: 22 }}
-              onClick={() =>
-                setCounter((prev) => {
-                  if (prev > 0) return prev - 1;
-                  else return 0;
-                })
-              }
+              onClick={() => {
+                if (count > 1) handleQuantityRemoval();
+              }}
             />
-            <span className="text-xl">{counter}</span>
+            <span className="text-xl">{count}</span>
             <ControlPointOutlinedIcon
               sx={{ color: "#472C9D", fontSize: 22 }}
-              onClick={() => setCounter((prev) => prev + 1)}
+              onClick={handleQuantityAddition}
             />
           </div>
         </div>
       </div>
-      <div className="m-5">
+      <div className="m-5" onClick={handleDelete}>
         <CancelOutlinedIcon sx={{ color: "red" }} />
       </div>
     </div>

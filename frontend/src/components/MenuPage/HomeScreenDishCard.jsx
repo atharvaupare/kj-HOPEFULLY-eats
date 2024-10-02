@@ -3,9 +3,9 @@ import loremPicsum from "lorem-picsum";
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import { NavLink } from "react-router-dom";
 
-const HomeScreenDishCard = ({ name }) => {
+const HomeScreenDishCard = ({ name, price }) => {
   return (
-    <NavLink to='/item'>
+    <NavLink to={`/item/${encodeURIComponent(name)}/${price}`}>
       <div className="p-10 bg-gradient-to-b from-[#EBE8E8] to-[#EFEEEE] flex flex-col justify-between items-center py-4 rounded-3xl">
         <div className="w-full flex flex-col justify-center items-center gap-2">
           <img
@@ -17,7 +17,7 @@ const HomeScreenDishCard = ({ name }) => {
         </div>
 
         <div className="w-full mt-2 flex justify-between">
-          <p>Rs. 20</p>
+          <p>Rs. {price}</p>
           <ControlPointOutlinedIcon sx={{ color: "#0E803C" }} />
         </div>
       </div>

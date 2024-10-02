@@ -4,8 +4,19 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 
 import AddOnCard from "./AddOnCard";
 import loremPicsum from "lorem-picsum";
+import cartContext from "../../context/cartContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Info = ({ counter, setCounter }) => {
+const Info = ({ counter, setCounter, price, name }) => {
+  const { addItem } = useContext(cartContext);
+  const navigate = useNavigate();
+
+  function handleCartAddition() {
+    addItem((prev) => [...prev, { name, price, quantity: counter }]);
+    navigate("/homepage");
+  }
+
   return (
     <div className="w-full h-[600px] bg-white rounded-t-[60px] animate-fade-up">
       <div className="flex justify-between items-center mb-5">
@@ -13,11 +24,13 @@ const Info = ({ counter, setCounter }) => {
           <div className="text-xl">⭐</div>
           <div className="text-xl">4.8</div>
         </div>
-        <div className="mt-3 mr-5 h-[50px] flex items-center text-2xl px-4 text-[#C9AA05] font-bold">Rs. 20</div>
+        <div className="mt-3 mr-5 h-[50px] flex items-center text-2xl px-4 text-[#C9AA05] font-bold">
+          Rs. {price}
+        </div>
       </div>
 
       <div className="mt-1 w-full flex justify-between">
-        <span className="text-2xl ml-5">Vada Pav</span>
+        <span className="text-2xl ml-5">{name}</span>
         <div className="mr-5 flex justify-center items-center gap-5">
           <RemoveCircleOutlineOutlinedIcon
             sx={{ color: "#472C9D", fontSize: 27 }}
@@ -50,7 +63,12 @@ const Info = ({ counter, setCounter }) => {
       </div>
 
       <div className="w-full flex justify-center mt-3">
-        <button className="px-10 py-3 my-5 text-xl bg-[#472C9D] text-white rounded-3xl">Add to Cart</button>
+        <button
+          className="px-10 py-3 my-5 text-xl bg-[#472C9D] text-white rounded-3xl"
+          onClick={handleCartAddition}
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );

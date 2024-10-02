@@ -2,25 +2,36 @@ import CartItem from "../components/CartPage/CartItem";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import visa from "../assets/visa.svg.png";
 
-import {NavLink} from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import cartContext from "../context/cartContext";
 
 const CartPage = () => {
-  let cartItems = 3;
-  let arr = ["Vada Pav", "Pav Bhaji", "Paneer Rice"];
+  const { items } = useContext(cartContext);
+  const navigate = useNavigate();
+
+  // Calculate the item total using reduce
+  const itemTotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const tax = itemTotal * 0.1;
+  const total = itemTotal + tax;
+
   return (
     <div className="w-screen h-full bg-[#F5F5F5] flex flex-col items-center overflow-hidden overflow-y-auto no-scrollbar pb-16">
       <div className="text-2xl font-semibold m-5 self-start">
-        <span>{cartItems == 0 ? "No" : cartItems} Items in cart</span>
+        <span>{items.length === 0 ? "No" : items.length} Items in cart</span>
       </div>
 
-      {cartItems == 0 ? (
-        <button className="w-fit px-10 py-3 my-5 text-2xl bg-[#472C9D] text-white rounded-3xl">
+      {items.length === 0 ? (
+        <button
+          className="w-fit px-10 py-3 my-5 text-2xl bg-[#472C9D] text-white rounded-3xl"
+          onClick={() => navigate("/homepage")}
+        >
           Add some items
         </button>
       ) : (
         <div className="w-full flex flex-col items-center p-5">
-          {arr.map((item, key) => (
-            <CartItem name={item} price={20} key={key} />
+          {items.map((item, key) => (
+            <CartItem name={item.name} price={item.price} quantity={item.quantity} key={key} />
           ))}
 
           <div className="flex flex-col items-center w-full">
@@ -42,15 +53,15 @@ const CartPage = () => {
             <div className="w-full flex flex-col m-5 gap-2">
               <div className="flex justify-between">
                 <span className="text-lg text-[#6F6D6D]">Subtotal</span>
-                <span>Rs. 20</span>
+                <span>Rs. {itemTotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-lg text-[#6F6D6D]">Tax 10%</span>
-                <span>Rs. 4</span>
+                <span>Rs. {tax.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-2xl">Total</span>
-                <span>Rs. 20</span>
+                <span>Rs. {total.toFixed(2)}</span>
               </div>
             </div>
 
