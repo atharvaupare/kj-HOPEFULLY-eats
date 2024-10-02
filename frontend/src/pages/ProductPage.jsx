@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const ProductPage = () => {
   const [counter, setCounter] = useState(1);
-  const { name: encodedName, price, desc } = useParams();
+  const { name: encodedName, price } = useParams();
 
   const name = decodeURIComponent(encodedName);
 
@@ -13,6 +13,7 @@ const ProductPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const description = searchParams.get("desc");
+  const rating = searchParams.get("rating");
   const imageUrl = searchParams.get("image");
   console.log(imageUrl, description);
 
@@ -37,6 +38,7 @@ const ProductPage = () => {
         name={name}
         image={imageUrl}
         description={description}
+        rating={rating}
       />
     </div>
   );

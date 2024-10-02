@@ -47,6 +47,7 @@ const PopularDishesSection = ({ selectedCuisine }) => {
           key={dish.id}
           image={dish.image}
           description={dish.description}
+          rating={dish.rating}
           dish
         />
       ))}

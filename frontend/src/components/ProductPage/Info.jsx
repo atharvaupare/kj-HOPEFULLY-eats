@@ -8,7 +8,15 @@ import cartContext from "../../context/cartContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Info = ({ counter, setCounter, price, name, image, description }) => {
+const Info = ({
+  counter,
+  setCounter,
+  price,
+  name,
+  image,
+  description,
+  rating,
+}) => {
   const { addItem } = useContext(cartContext);
   const navigate = useNavigate();
 
@@ -25,7 +33,7 @@ const Info = ({ counter, setCounter, price, name, image, description }) => {
       <div className="flex justify-between items-center mb-5">
         <div className="px-4 ml-5 mt-3 h-[50px] bg-[#472C9D] text-white rounded-[30px] flex gap-2 justify-center items-center">
           <div className="text-xl">⭐</div>
-          <div className="text-xl">4.8</div>
+          <div className="text-xl">{rating}</div>
         </div>
         <div className="mt-3 mr-5 h-[50px] flex items-center text-2xl px-4 text-[#C9AA05] font-bold">
           Rs. {price}
