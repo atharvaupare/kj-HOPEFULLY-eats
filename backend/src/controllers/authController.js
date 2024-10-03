@@ -6,13 +6,16 @@ const generateToken = (idNumber, email) => {
   return jwt.sign({ idNumber, email }, process.env.JWT_SECRET);
 };
 
-// Register user
+// Register User
 const registerUser = async (req, res) => {
   const { idNumber, email, password, mobileNo } = req.body;
 
   try {
-    // Check if the user already exists
-    const userExists = await User.findOne({ email });
+    // Log request body for debugging purposes
+    console.log("Register User Request Body:", req.body);
+
+    // Check if the user already exists by email or idNumber
+    const userExists = await User.findOne({ $or: [{ email }, { idNumber }] });
 
     if (userExists) {
       return res
@@ -21,12 +24,15 @@ const registerUser = async (req, res) => {
     }
 
     // Create a new user
-    const user = await User.create({
+    const user = new User({
       idNumber,
       email,
       password,
       mobileNo,
     });
+
+    // Save user to the database
+    await user.save();
 
     // Generate token
     const token = generateToken(user.idNumber, user.email);
@@ -38,6 +44,19 @@ const registerUser = async (req, res) => {
       token,
     });
   } catch (error) {
+    // Log the actual error for debugging
+    console.error("Error Registering User:", error);
+
+    // Handle Mongoose validation errors
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid input data",
+        errors: error.errors,
+      });
+    }
+
+    // Handle other possible errors
     res.status(500).json({ status: "fail", message: "Error registering user" });
   }
 };
