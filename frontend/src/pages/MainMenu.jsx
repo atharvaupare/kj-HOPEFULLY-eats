@@ -45,11 +45,11 @@ const MainMenu = () => {
 
           {cuisines.map((cuisine) => (
             <CuisineWrapper
-              key={cuisine.id}
-              name={cuisine.name}
-              selected={selectedOption === cuisine.name}
+              key={cuisine.attributes.id}
+              name={cuisine.attributes.name}
+              selected={selectedOption === cuisine.attributes.name}
               set={setSelectedOption}
-              image={cuisine.image}
+              image={cuisine.attributes.image.data.attributes}
             />
           ))}
         </div>

@@ -2,13 +2,6 @@ import { useEffect, useState } from "react";
 import HomeScreenDishCard from "./HomeScreenDishCard";
 
 const PopularDishesSection = ({ selectedCuisine }) => {
-  // let arr = [
-  //   { name: "Vada Pav", price: 20 },
-  //   { name: "Pav Bhaji", price: 50 },
-  //   { name: "Paneer Rice", price: 40 },
-  //   { name: "Samosa Pav", price: 20 },
-  // ];
-
   const [dishes, setDishes] = useState([]);
 
   useEffect(() => {
@@ -35,19 +28,28 @@ const PopularDishesSection = ({ selectedCuisine }) => {
   const filteredDishes =
     selectedCuisine === "All"
       ? dishes
-      : dishes.filter((dish) => dish.cuisine.name === selectedCuisine);
+      : dishes.filter((dish) => {
+          console.log(
+            "Dish inside filter:",
+            dish.attributes.cuisine.data.attributes.name
+          ); // Log each dish
+          return (
+            dish.attributes.cuisine.data.attributes.name === selectedCuisine
+          );
+        });
+
   console.log(filteredDishes);
 
   return (
     <div className="w-full h-full grid grid-cols-2 my-5 gap-5">
       {filteredDishes.map((dish) => (
         <HomeScreenDishCard
-          name={dish.name}
-          price={dish.price}
+          name={dish.attributes.name}
+          price={dish.attributes.price}
           key={dish.id}
-          image={dish.image}
-          description={dish.description}
-          rating={dish.rating}
+          image={dish.attributes.image.data.attributes}
+          description={dish.attributes.description}
+          rating={dish.attributes.rating}
           dish
         />
       ))}
