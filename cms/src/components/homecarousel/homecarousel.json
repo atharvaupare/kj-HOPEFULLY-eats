@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_homecarousel_homecarousels",
+  "info": {
+    "displayName": "homecarousel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}
