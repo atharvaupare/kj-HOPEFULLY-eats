@@ -788,286 +788,87 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutAbout extends Schema.CollectionType {
-  collectionName: 'abouts';
+export interface ApiCuisineCuisine extends Schema.CollectionType {
+  collectionName: 'cuisines';
   info: {
-    singularName: 'about';
-    pluralName: 'abouts';
-    displayName: 'about';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    forwho: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    whobenefits: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBlogBlog extends Schema.CollectionType {
-  collectionName: 'blogs';
-  info: {
-    singularName: 'blog';
-    pluralName: 'blogs';
-    displayName: 'blog';
+    singularName: 'cuisine';
+    pluralName: 'cuisines';
+    displayName: 'cuisine';
     description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    blog: Attribute.Component<'blog.blog', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFaqFaq extends Schema.CollectionType {
-  collectionName: 'faqs';
-  info: {
-    singularName: 'faq';
-    pluralName: 'faqs';
-    displayName: 'faq';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    question: Attribute.String;
-    answer: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiGalleryGallery extends Schema.CollectionType {
-  collectionName: 'galleries';
-  info: {
-    singularName: 'gallery';
-    pluralName: 'galleries';
-    displayName: ' Gallery';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    venue: Attribute.String;
-    campaignName: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::gallery.gallery',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::gallery.gallery',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiGroupsessionGroupsession extends Schema.CollectionType {
-  collectionName: 'groupsessions';
-  info: {
-    singularName: 'groupsession';
-    pluralName: 'groupsessions';
-    displayName: 'groupsession';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    Title: Attribute.String;
-    for: Attribute.String;
-    description: Attribute.Text;
-    isavailable: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::groupsession.groupsession',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::groupsession.groupsession',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiHomeHome extends Schema.CollectionType {
-  collectionName: 'homes';
-  info: {
-    singularName: 'home';
-    pluralName: 'homes';
-    displayName: 'home';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    carousel: Attribute.Component<'homecarousel.homecarousel', true>;
-    testimonials: Attribute.Component<'testimonials.testimonials', true>;
-    achivements: Attribute.Component<'achivements.achivements', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSessionSession extends Schema.CollectionType {
-  collectionName: 'sessions';
-  info: {
-    singularName: 'session';
-    pluralName: 'sessions';
-    displayName: 'sessions';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    keyfeatures: Attribute.Component<'sessioncard.keyfeatures', true>;
-    info: Attribute.Component<'info.info', true>;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    date: Attribute.Date;
-    time: Attribute.String;
-    facilitator: Attribute.String;
-    tag: Attribute.Component<'tags.tags'>;
-    beneficiaries: Attribute.Component<'sessioncard.beneficiaries', true>;
-    cancellationpolicy: Attribute.Component<'sessioncard.cancellationpolicy'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::session.session',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::session.session',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSessioncardSessioncard extends Schema.CollectionType {
-  collectionName: 'sessioncards';
-  info: {
-    singularName: 'sessioncard';
-    pluralName: 'sessioncards';
-    displayName: 'sessioncard';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    cardimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    date: Attribute.Date;
-    profileimg: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    facilitator: Attribute.String;
-    info: Attribute.Component<'info.info', true>;
-    slug: Attribute.UID<'api::sessioncard.sessioncard', 'title'>;
-    keyfeatures: Attribute.Component<'sessioncard.keyfeatures', true>;
-    beneficiaries: Attribute.Component<'sessioncard.beneficiaries', true>;
-    cancellationpolicy: Attribute.Component<'sessioncard.cancellationpolicy'>;
-    for: Attribute.Enumeration<['College Students', 'High School Students']> &
-      Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::sessioncard.sessioncard',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::sessioncard.sessioncard',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTeamTeam extends Schema.CollectionType {
-  collectionName: 'teams';
-  info: {
-    singularName: 'team';
-    pluralName: 'teams';
-    displayName: 'team';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    medialinks: Attribute.JSON;
-    description: Attribute.Text;
-    role: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    menu_items: Attribute.Relation<
+      'api::cuisine.cuisine',
+      'oneToMany',
+      'api::menu-item.menu-item'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+    createdBy: Attribute.Relation<
+      'api::cuisine.cuisine',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
-    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+    updatedBy: Attribute.Relation<
+      'api::cuisine.cuisine',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMenuItemMenuItem extends Schema.CollectionType {
+  collectionName: 'menu_items';
+  info: {
+    singularName: 'menu-item';
+    pluralName: 'menu-items';
+    displayName: 'menuItem';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    price: Attribute.Integer;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    rating: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      > &
+      Attribute.DefaultTo<4>;
+    inStock: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
+    cuisine: Attribute.Relation<
+      'api::menu-item.menu-item',
+      'manyToOne',
+      'api::cuisine.cuisine'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::menu-item.menu-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::menu-item.menu-item',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1090,15 +891,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::about.about': ApiAboutAbout;
-      'api::blog.blog': ApiBlogBlog;
-      'api::faq.faq': ApiFaqFaq;
-      'api::gallery.gallery': ApiGalleryGallery;
-      'api::groupsession.groupsession': ApiGroupsessionGroupsession;
-      'api::home.home': ApiHomeHome;
-      'api::session.session': ApiSessionSession;
-      'api::sessioncard.sessioncard': ApiSessioncardSessioncard;
-      'api::team.team': ApiTeamTeam;
+      'api::cuisine.cuisine': ApiCuisineCuisine;
+      'api::menu-item.menu-item': ApiMenuItemMenuItem;
     }
   }
 }
