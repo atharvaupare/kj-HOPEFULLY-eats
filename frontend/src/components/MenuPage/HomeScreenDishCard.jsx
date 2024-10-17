@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-import loremPicsum from "lorem-picsum";
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import { NavLink } from "react-router-dom";
 
 const HomeScreenDishCard = ({ name, price, image, description, rating }) => {
-  const baseUrl = "http://localhost:1337"; // Replace with your Strapi base URL
-  // console.log(image, description);
+  const baseUrl = "http://localhost:1337";
 
   const imageUrl = image
     ? `${baseUrl}${image.url}`
@@ -21,14 +19,14 @@ const HomeScreenDishCard = ({ name, price, image, description, rating }) => {
         rating
       )}`}
     >
-      <div className="p-10 bg-gradient-to-b from-[#EBE8E8] to-[#EFEEEE] flex flex-col justify-between items-center py-4 rounded-3xl">
+      <div className="p-4 bg-gradient-to-b from-[#EBE8E8] to-[#EFEEEE] flex flex-col justify-between items-center py-4 rounded-3xl h-full">
         <div className="w-full flex flex-col justify-center items-center gap-2">
-          <img src={imageUrl} alt="" className="rounded-lg" />
-          <h2>{name}</h2>
+          <img src={imageUrl} alt={name} className="w-[120px] h-[120px] object-cover rounded-lg" />
+          <h2 className="text-center text-lg font-semibold">{name}</h2>
         </div>
 
-        <div className="w-full mt-2 flex justify-between">
-          <p>Rs. {price}</p>
+        <div className="w-full mt-2 flex justify-between items-center">
+          <p className="text-base font-medium">Rs. {price}</p>
           <ControlPointOutlinedIcon sx={{ color: "#0E803C" }} />
         </div>
       </div>

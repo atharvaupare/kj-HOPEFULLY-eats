@@ -16,7 +16,7 @@ const BottomNav = () => {
           <HomeIcon sx={{ fontSize: 30, color: "#9D9C9C" }} />
         )}
       </NavLink>
-      <NavLink>
+      <NavLink to={"/homepage/search"}>
         {location.pathname == "/homepage/search" ? (
           <SearchIcon sx={{ fontSize: 30, color: "#462B9C" }} />
         ) : (

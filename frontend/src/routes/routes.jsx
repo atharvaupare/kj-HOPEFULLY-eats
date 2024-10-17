@@ -4,6 +4,7 @@ import MainMenu from "../pages/MainMenu";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import ProfilePage from "../pages/ProfilePage";
+import SearchPage from "../pages/SearchPage"
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
       {
         path: "",
         element: <MainMenu />, 
+      },
+      {
+        path: "search/:text?",
+        element: <SearchPage />, 
       },
       {
         path: "profile",

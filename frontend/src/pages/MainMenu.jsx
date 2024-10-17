@@ -4,6 +4,7 @@ import Searchbar from "../components/MenuPage/Searchbar";
 import CuisineButton from "../components/MenuPage/CuisineButton";
 import SpecialBanner from "../components/MenuPage/SpecialBanner";
 import PopularDishesSection from "../components/MenuPage/PopularDishesSection";
+import AllImage from "../assets/all.webp";
 import { useState, useEffect } from "react";
 
 const MainMenu = () => {
@@ -41,6 +42,7 @@ const MainMenu = () => {
             name="All"
             selected={selectedOption === "All"}
             set={setSelectedOption}
+            image={AllImage}
           />
 
           {cuisines.map((cuisine) => (
@@ -75,7 +77,7 @@ const CuisineWrapper = ({ name, selected = false, set, image }) => {
       className="flex flex-col items-center gap-1 flex-shrink-0"
       onClick={() => set(name)}
     >
-      <CuisineButton selected={selected} image={image} />
+      <CuisineButton selected={selected} image={image} name={name}/>
       <span className="text-sm">{name}</span>
     </div>
   );
