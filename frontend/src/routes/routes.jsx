@@ -4,7 +4,7 @@ import MainMenu from "../pages/MainMenu";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import ProfilePage from "../pages/ProfilePage";
-import SearchPage from "../pages/SearchPage"
+import SearchPage from "../pages/SearchPage";
 
 const routes = [
   {
@@ -30,7 +30,7 @@ const routes = [
       {
         path: "cart",
         element: <CartPage />, 
-      }
+      },
     ],
   },
   {
