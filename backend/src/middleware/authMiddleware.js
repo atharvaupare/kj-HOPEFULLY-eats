@@ -1,34 +1,69 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+const User = require('../models/userModel');
 
-// Middleware to verify the JWT token
-const protect = (req, res, next) => {
-  let token;
-
-  // Check if the authorization header exists and contains a Bearer token
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
+const protect = async (req, res, next) => {
     try {
-      token = req.headers.authorization.split(" ")[1];
+        const authHeader = req.header('Authorization');
+        if (!authHeader) {
+            return res.status(401).json({
+                error: 'Please authenticate',
+                details: 'No authorization header found'
+            });
+        }
 
-      // Verify the token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({
+                error: 'Please authenticate',
+                details: 'Invalid token format. Use: Bearer <token>'
+            });
+        }
 
-      // Attach the user id and email to the request object
-      req.user = decoded;
+        const token = authHeader.replace('Bearer ', '');
 
-      next(); // Call the next middleware/controller
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+        const user = await User.findOne({ 
+            _id: decoded.id, 
+            'tokens.token': token 
+        });
+
+        if (!user) {
+            return res.status(401).json({
+                error: 'Please authenticate',
+                details: 'User not found or token invalid'
+            });
+        }
+
+        if (decoded.exp && decoded.exp * 1000 < Date.now()) {
+            return res.status(401).json({
+                error: 'Please authenticate',
+                details: 'Token has expired'
+            });
+        }
+
+        req.token = token;
+        req.user = user;
+        next();
+
     } catch (error) {
-      res.status(401).json({ message: "Invalid token, authorization denied" });
-    }
-  }
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({
+                error: 'Please authenticate',
+                details: 'Invalid token'
+            });
+        }
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                error: 'Please authenticate',
+                details: 'Token has expired'
+            });
+        }
 
-  if (!token) {
-    res
-      .status(401)
-      .json({ message: "No token provided, authorization denied" });
-  }
+        res.status(401).json({
+            error: 'Please authenticate',
+            details: error.message
+        });
+    }
 };
 
 module.exports = { protect };

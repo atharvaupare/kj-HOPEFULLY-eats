@@ -3,11 +3,9 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
   {
-    idNumber: {
+    name: {
       type: String,
-      required: true,
-      unique: true,
-      match: [/^\d{10}$/, "ID must be a 10-digit number"], // Ensures ID is exactly 12 digits
+      required: [true, 'name is required']
     },
     email: {
       type: String,
@@ -19,10 +17,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    mobileNo: {
-      type: String,
-      default: null,
-    },
+    tokens: [{
+      token: {
+        type: String,
+        required: true
+      }
+    }],
+    orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Order', 
+      },
+    ],
   },
   {
     timestamps: true,

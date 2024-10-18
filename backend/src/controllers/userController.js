@@ -1,12 +1,13 @@
 const User = require("../models/userModel");
+const Order = require("../models/orderModel");
 
 // Get user profile
 const getUserProfile = async (req, res) => {
   try {
-    // Find the user by idNumber from token
-    const user = await User.findOne({ idNumber: req.user.idNumber }).select(
+    // Find the user by email from token
+    const user = await User.findOne({ email: req.user.email }).select(
       "-password"
-    ); // Exclude password field
+    );
 
     if (user) {
       res.status(200).json({
@@ -31,11 +32,10 @@ const getUserProfile = async (req, res) => {
 // Update user profile
 const updateUserProfile = async (req, res) => {
   try {
-    // Find the user by idNumber from token
-    const user = await User.findOne({ idNumber: req.user.idNumber });
+    const user = await User.findOne({ email: req.user.email });
 
     if (user) {
-      user.email = user.email; // Email cannot be updated
+      user.email = user.email;
       user.mobileNo = req.body.mobileNo || user.mobileNo;
 
       const updatedUser = await user.save();
@@ -59,4 +59,45 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { getUserProfile, updateUserProfile };
+const placeOrder = async (req, res) => {
+  try {
+    const { cartItems, totalAmount, deliveryAddress } = req.body;
+
+    if (!cartItems || cartItems.length === 0) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Cart items are required",
+      });
+    }
+
+    const order = new Order({
+      user: req.user._id, 
+      cartItems, 
+      totalAmount, 
+    });
+
+    // Save the order to the database
+    const createdOrder = await order.save();
+
+    const user = await User.findById(req.user._id);
+    if (user) {
+      user.orders.push(createdOrder._id); 
+      await user.save(); 
+    }
+
+    res.status(201).json({
+      status: "success",
+      message: "Order placed successfully",
+      data: createdOrder,
+    });
+  } catch (error) {
+    console.error("Error placing order:", error);
+    res.status(500).json({
+      status: "fail",
+      message: "Error placing order",
+    });
+  }
+};
+
+
+module.exports = { getUserProfile, updateUserProfile, placeOrder };

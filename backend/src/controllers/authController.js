@@ -2,20 +2,33 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 
 // Generate JWT Token
-const generateToken = (idNumber, email) => {
-  return jwt.sign({ idNumber, email }, process.env.JWT_SECRET);
+const generateToken = async (user) => {
+  try {
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    // Add token to user's tokens array
+    user.tokens = user.tokens.concat({ token });
+    await user.save();
+    
+    return token;
+  } catch (error) {
+    throw new Error('Error generating token: ' + error.message);
+  }
 };
 
 // Register User
 const registerUser = async (req, res) => {
-  const { idNumber, email, password, mobileNo } = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    // Log request body for debugging purposes
     console.log("Register User Request Body:", req.body);
 
-    // Check if the user already exists by email or idNumber
-    const userExists = await User.findOne({ $or: [{ email }, { idNumber }] });
+    // Check if the user already exists by email
+    const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res
@@ -25,17 +38,16 @@ const registerUser = async (req, res) => {
 
     // Create a new user
     const user = new User({
-      idNumber,
+      name,
       email,
       password,
-      mobileNo,
     });
 
     // Save user to the database
     await user.save();
 
     // Generate token
-    const token = generateToken(user.idNumber, user.email);
+    const token = await generateToken(user);
 
     // Send response
     res.status(201).json({
@@ -44,7 +56,6 @@ const registerUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    // Log the actual error for debugging
     console.error("Error Registering User:", error);
 
     // Handle Mongoose validation errors
@@ -61,7 +72,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Login user
+// Login User
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -71,7 +82,9 @@ const loginUser = async (req, res) => {
 
     // Check if user exists and password matches
     if (user && (await user.matchPassword(password))) {
-      const token = generateToken(user.idNumber, user.email);
+      // Generate token
+      const token = await generateToken(user);
+      
       res.status(200).json({
         status: "success",
         message: "Login successful",
@@ -83,6 +96,7 @@ const loginUser = async (req, res) => {
         .json({ status: "fail", message: "Invalid email or password" });
     }
   } catch (error) {
+    console.error("Error Logging In User:", error);
     res.status(500).json({ status: "fail", message: "Error logging in user" });
   }
 };
