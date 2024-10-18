@@ -32,7 +32,7 @@ const SearchResultCard = ({ name, cuisines, time, price, image, rating, descript
           object-cover`}
         />
 
-        <div className="absolute top-2 left-2 flex items-center gap-2 bg-white/80 p-1 rounded-md text-sm">
+        <div className="absolute top-[120px] left-1 flex items-center gap-1 bg-white/80 p-1 rounded-md text-sm">
           <AccessTimeIcon fontSize="small" />
           <span>{time} min</span>
         </div>

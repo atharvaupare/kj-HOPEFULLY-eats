@@ -16,7 +16,7 @@ const SearchComponent = ({ setIsTyping, searchText, setSearchText }) => {
         onChange={(e)=>setSearchText(e.target.value)}
         value={searchText}
       />
-      <span className="text-sm">Cancel</span>
+      <span className="text-sm hover:text-gray-600" onClick={()=>setSearchText("")}>Cancel</span>
     </div>
   );
 };
