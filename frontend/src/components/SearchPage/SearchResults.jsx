@@ -19,7 +19,6 @@ const SearchResults = ({ searchText }) => {
         const matchedResults = data.data.filter(({ attributes }) =>
           attributes.name.match(regex)
         );
-        console.log(matchedResults);
 
         setResults(matchedResults);
       } catch (e) {
@@ -27,7 +26,11 @@ const SearchResults = ({ searchText }) => {
       }
     };
 
-    getItems();
+    if (debouncedText) {
+      getItems();
+    } else {
+      setResults([]);
+    }
   }, [debouncedText]);
 
   return (
@@ -36,9 +39,10 @@ const SearchResults = ({ searchText }) => {
         <li key={key} className="w-full">
           <SearchResultCard
             id={result.attributes.id}
+            searchText={searchText}
             name={result.attributes.name}
             cuisines={result.attributes.cuisine.data.attributes.name}
-            time={25} // Static for now, adjust based on real data
+            time={25}
             description={result.attributes.description}
             price={result.attributes.price}
             image={result.attributes.image.data.attributes}

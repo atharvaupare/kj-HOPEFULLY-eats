@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import HomeScreenDishCard from "./HomeScreenDishCard";
 
@@ -5,7 +6,6 @@ const PopularDishesSection = ({ selectedCuisine }) => {
   const [dishes, setDishes] = useState([]);
 
   useEffect(() => {
-    // Fetch menu items from the API
     const fetchDishes = async () => {
       try {
         const response = await fetch(
@@ -24,7 +24,6 @@ const PopularDishesSection = ({ selectedCuisine }) => {
     fetchDishes();
   }, []);
 
-  console.log(selectedCuisine);
   const filteredDishes =
     selectedCuisine === "All"
       ? dishes
@@ -38,11 +37,11 @@ const PopularDishesSection = ({ selectedCuisine }) => {
           );
         });
 
-  console.log(filteredDishes);
+  const limitedDishes = filteredDishes.slice(0, 4);
 
   return (
     <div className="w-full h-full grid grid-cols-2 my-5 gap-5">
-      {filteredDishes.map((dish) => (
+      {limitedDishes.map((dish) => (
         <HomeScreenDishCard
           name={dish.attributes.name}
           price={dish.attributes.price}

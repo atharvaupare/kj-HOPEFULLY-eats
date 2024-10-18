@@ -1,22 +1,30 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useRef } from "react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-const SearchComponent = ({ setIsTyping, searchText, setSearchText }) => {
+const SearchComponent = ({ setIsTyping, setSearchText, searchText }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
-    <div className="w-full h-[50px] mt-3 flex items-center gap-2 px-5">
-      <SearchOutlinedIcon
-        sx={{ fontSize: 25, color: "gray" }}
-        className="mr-2"
-      />
-      <input
-        type="text"
-        className="p-2 w-[75%] h-full outline-none text-lg"
-        placeholder="Search"
-        onFocus={()=>setIsTyping(true)}
-        onChange={(e)=>setSearchText(e.target.value)}
-        value={searchText}
-      />
-      <span className="text-sm hover:text-gray-600" onClick={()=>setSearchText("")}>Cancel</span>
+    <div className="w-screen px-5 pt-5">
+      <div className="w-full h-[50px] bg-[#F5F5F5] rounded-md flex items-center px-4 gap-3">
+        <SearchOutlinedIcon sx={{ fontSize: 21 }} />
+        <input
+          ref={inputRef}
+          type="text"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setIsTyping(true);
+          }}
+          className="w-full h-full bg-transparent outline-none"
+          placeholder="Search for dishes..."
+        />
+      </div>
     </div>
   );
 };

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "menu-item",
     "pluralName": "menu-items",
-    "displayName": "menuItem"
+    "displayName": "menuItem",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,14 +22,15 @@
       "type": "integer"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "rating": {
       "type": "decimal",
@@ -46,6 +48,9 @@
       "relation": "manyToOne",
       "target": "api::cuisine.cuisine",
       "inversedBy": "menu_items"
+    },
+    "time": {
+      "type": "integer"
     }
   }
 }

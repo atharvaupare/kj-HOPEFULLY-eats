@@ -1,15 +1,37 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import SearchComponent from "../components/SearchPage/SearchComponent";
 import SearchResults from "../components/SearchPage/SearchResults";
 
 const SearchPage = () => {
   const { text } = useParams();
-  const search = text || ""; 
+  const navigate = useNavigate();
   const [recent, setRecent] = useState(["rice", "pav", "pasta", "pizza"]);
-  const [isTyping, setIsTyping] = useState(Boolean(text)); // Set typing state based on whether there's a search term
-  const [searchText, setSearchText] = useState(search);
+  const [isTyping, setIsTyping] = useState(Boolean(text));
+  const [searchText, setSearchText] = useState(text || "");
+
+  // Update URL when search text changes
+  useEffect(() => {
+    if (searchText) {
+      navigate(`/homepage/search/${searchText}`, { replace: true });
+    } else {
+      navigate('/homepage/search', { replace: true });
+    }
+  }, [searchText, navigate]);
+
+  // Update search text when URL parameter changes
+  useEffect(() => {
+    if (text) {
+      setSearchText(text);
+      setIsTyping(true);
+    }
+  }, [text]);
+
+  const handleRecentSearch = (item) => {
+    setSearchText(item);
+    setIsTyping(true);
+  };
 
   return (
     <div className="w-screen h-screen flex flex-col items-center">
@@ -36,7 +58,11 @@ const SearchPage = () => {
             </div>
             <ul>
               {recent.map((item, key) => (
-                <li key={key} className="p-5 flex gap-5 items-center h-[80px]">
+                <li 
+                  key={key} 
+                  className="p-5 flex gap-5 items-center h-[80px] cursor-pointer"
+                  onClick={() => handleRecentSearch(item)}
+                >
                   <SearchOutlinedIcon sx={{ fontSize: 21 }} />
                   <span className="text-[18px]">{item}</span>
                 </li>

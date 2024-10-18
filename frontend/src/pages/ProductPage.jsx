@@ -1,33 +1,43 @@
 import Info from "../components/ProductPage/Info";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-import { NavLink, useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const ProductPage = () => {
   const [counter, setCounter] = useState(1);
   const { name: encodedName, price } = useParams();
-
+  const navigate = useNavigate();
   const name = decodeURIComponent(encodedName);
 
-  // Get the image URL from the query parameters
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const description = searchParams.get("desc");
   const rating = searchParams.get("rating");
   const imageUrl = searchParams.get("image");
-  console.log(imageUrl, description);
+  const returnPath = searchParams.get("returnPath");
+
+  const handleBack = () => {
+    if (returnPath) {
+      navigate(returnPath);
+    } else {
+      navigate(-1);
+    }
+  };
 
   return (
     <div className="w-screen h-screen bg-gradient-to-b from-[#462B9C] to-[#644AB5] flex flex-col items-center gap-10 overflow-hidden">
-      <NavLink to="/homepage" className="ml-5 mt-5 self-start">
+      <button 
+        onClick={handleBack}
+        className="ml-5 mt-5 self-start bg-transparent border-none cursor-pointer"
+      >
         <ArrowBackIosNewOutlinedIcon sx={{ color: "white", fontSize: 20 }} />
-      </NavLink>
+      </button>
 
       <div className="h-[50%] w-[70%] flex justify-center items-center rounded-full">
         <img
           src={imageUrl || "https://via.placeholder.com/300"}
           alt={name}
-          className="h-full w-full object-cover overflow-hidden "
+          className="h-full w-full object-cover overflow-hidden"
         />
       </div>
 

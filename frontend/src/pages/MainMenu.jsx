@@ -58,13 +58,17 @@ const MainMenu = () => {
       </div>
 
       <div className="w-full flex flex-col mt-5 px-5">
-        <h2 className="text-2xl mb-3">Today's Specials</h2>
+        <h2 className="text-2xl mb-3">{`Today's Specials`}</h2>
         <SpecialBanner />
       </div>
 
       <div className="w-full flex flex-col mt-5 px-5">
         <h2 className="text-2xl mb-3">Popular</h2>
         <PopularDishesSection selectedCuisine={selectedOption} />
+      </div>
+
+      <div className="w-full flex justify-center transition-all hover:scale-105">
+        <button className="p-3 bg-[#4c2fab] rounded-full text-white text-lg">Explore our menu</button>
       </div>
     </div>
   );
@@ -77,7 +81,7 @@ const CuisineWrapper = ({ name, selected = false, set, image }) => {
       className="flex flex-col items-center gap-1 flex-shrink-0"
       onClick={() => set(name)}
     >
-      <CuisineButton selected={selected} image={image} name={name}/>
+      <CuisineButton selected={selected} image={image} name={name} />
       <span className="text-sm">{name}</span>
     </div>
   );

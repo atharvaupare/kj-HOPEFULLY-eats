@@ -22,12 +22,13 @@ const BottomNav = () => {
         )}
       </NavLink>
       <NavLink to={"/homepage/search/"}>
-        {location.pathname.match(/^\/homepage\/search\/.+$/) ? (
+        {location.pathname.match(/^\/homepage\/search(\/.*)?$/) ? (
           <SearchIcon sx={{ fontSize: 30, color: "#462B9C" }} />
         ) : (
           <SearchIcon sx={{ fontSize: 30, color: "#9D9C9C" }} />
         )}
       </NavLink>
+
       <NavLink to="/homepage/cart">
         <div className="relative h-[50px] w-[30px] flex justify-center items-center">
           {noOfItems > 0 && (
