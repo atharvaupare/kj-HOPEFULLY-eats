@@ -5,28 +5,19 @@ const cartItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-  },
   price: {
     type: Number,
     required: true,
   },
-  rating: {
-    type: Number,
-    min: 0,
-    max: 5,
-  },
-  inStock: {
-    type: Boolean,
-    default: true,
-    required: true,
+  image: {
+    type: String,
+    required: false,
   },
   cuisine: {
-    type: String, 
+    type: String,
   },
   time: {
-    type: Number, 
+    type: Number,
   },
   quantity: {
     type: Number,
@@ -41,13 +32,13 @@ const cartItemSchema = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', 
+    ref: 'User',
     required: true,
   },
-  cartItems: [cartItemSchema], // Embedding the cart items as an array of objects
+  cartItems: [cartItemSchema],
   totalAmount: {
     type: Number,
-    required: true, // Sum of totalPrice for all cart items
+    required: true,
   },
   status: {
     type: String,
@@ -57,9 +48,14 @@ const orderSchema = new mongoose.Schema({
   orderDate: {
     type: Date,
     default: Date.now,
+  },
+  orderToken: {
+    type: String,
+    required: true,
+    unique: true
   }
 }, {
-  timestamps: true, // Adds createdAt and updatedAt fields
+  timestamps: true,
 });
 
 const Order = mongoose.model('Order', orderSchema);

@@ -70,19 +70,22 @@ const placeOrder = async (req, res) => {
       });
     }
 
+    const { nanoid } = await import('nanoid');
+    const orderToken = nanoid(10);
+
     const order = new Order({
-      user: req.user._id, 
-      cartItems, 
-      totalAmount, 
+      user: req.user._id,
+      cartItems,
+      totalAmount,
+      orderToken
     });
 
-    // Save the order to the database
     const createdOrder = await order.save();
 
     const user = await User.findById(req.user._id);
     if (user) {
-      user.orders.push(createdOrder._id); 
-      await user.save(); 
+      user.orders.push(createdOrder._id);
+      await user.save();
     }
 
     res.status(201).json({
