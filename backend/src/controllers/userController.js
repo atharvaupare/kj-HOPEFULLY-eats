@@ -61,7 +61,7 @@ const updateUserProfile = async (req, res) => {
 
 const placeOrder = async (req, res) => {
   try {
-    const { cartItems, totalAmount, deliveryAddress } = req.body;
+    const { cartItems, totalAmount, estimatedTime } = req.body; // Add estimatedTime
 
     if (!cartItems || cartItems.length === 0) {
       return res.status(400).json({
@@ -77,6 +77,7 @@ const placeOrder = async (req, res) => {
       user: req.user._id,
       cartItems,
       totalAmount,
+      estimatedTime,
       orderToken
     });
 
@@ -84,7 +85,7 @@ const placeOrder = async (req, res) => {
 
     const user = await User.findById(req.user._id);
     if (user) {
-      user.orders.push(createdOrder._id);
+      user.orders.push(orderToken);
       await user.save();
     }
 
@@ -103,4 +104,39 @@ const placeOrder = async (req, res) => {
 };
 
 
-module.exports = { getUserProfile, updateUserProfile, placeOrder };
+const retrieveOrder = async (req, res) => {
+  try {
+    const { orderToken } = req.params;
+
+    const order = await Order.findOne({ orderToken });
+
+    if (order) {
+      if (order.user.toString() === req.user._id.toString()) {
+        res.status(200).json({
+          status: "success",
+          message: "Order retrieved successfully",
+          data: order,
+        });
+      } else {
+        res.status(403).json({
+          status: "fail",
+          message: "You are not authorized to view this order",
+        });
+      }
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "Order not found",
+      });
+    }
+  } catch (error) {
+    console.error("Error retrieving order:", error);
+    res.status(500).json({
+      status: "fail",
+      message: "Server error while retrieving order",
+    });
+  }
+};
+
+
+module.exports = { getUserProfile, updateUserProfile, placeOrder, retrieveOrder };

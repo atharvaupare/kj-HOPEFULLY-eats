@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
-const ProfileInfoTag = ({ head, desc, icon1, icon2 }) => {
+const ProfileInfoTag = ({ head, desc, icon1, icon2, onClick }) => {
   return (
-    <div className="w-[90%] h-[80px] bg-white flex gap-3 items-center justify-between">
+    <div onClick={onClick} className="w-[90%] h-[80px] bg-white flex gap-3 items-center justify-between">
       <div className="flex gap-3">
         <div className="size-[50px] bg-[#F0F0F8] rounded-full flex justify-center items-center ml-2">
           {icon1}

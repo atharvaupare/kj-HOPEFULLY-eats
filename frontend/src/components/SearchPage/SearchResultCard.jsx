@@ -24,6 +24,7 @@ const SearchResultCard = ({
           new URLSearchParams({
             image: imageUrl,
             desc: description,
+            time: time,
             rating: rating,
             returnPath: `/homepage/search/${encodeURIComponent(searchText)}`
           }).toString()}

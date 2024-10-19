@@ -2,7 +2,7 @@
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import { NavLink, useLocation } from "react-router-dom";
 
-const HomeScreenDishCard = ({ name, price, image, description, rating }) => {
+const HomeScreenDishCard = ({ name, price, image, description, rating, time }) => {
   const location = useLocation()
   const baseUrl = "http://localhost:1337";
 
@@ -18,7 +18,7 @@ const HomeScreenDishCard = ({ name, price, image, description, rating }) => {
         imageUrl
       )}&desc=${encodeURIComponent(description)}&rating=${encodeURIComponent(
         rating
-      )}&prevPath=${encodeURIComponent(location.pathname)}`}
+      )}&time=${encodeURIComponent(time)}&prevPath=${encodeURIComponent(location.pathname)}`}
     >
       <div className="p-4 bg-gradient-to-b from-[#EBE8E8] to-[#EFEEEE] flex flex-col justify-between items-center py-4 rounded-3xl h-full">
         <div className="w-full flex flex-col justify-center items-center gap-2">

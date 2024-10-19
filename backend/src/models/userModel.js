@@ -23,12 +23,9 @@ const userSchema = new mongoose.Schema(
         required: true
       }
     }],
-    orders: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order', 
-      },
-    ],
+    orders: {
+      type: [String],
+    },
   },
   {
     timestamps: true,

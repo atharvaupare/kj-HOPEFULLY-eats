@@ -1,17 +1,71 @@
 import CartItem from "../components/CartPage/CartItem";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import visa from "../assets/visa.svg.png";
-
+import { useState } from "react";
+import OrderConfirmation from "../components/OrderConfirmation";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import cartContext from "../context/cartContext";
 
 const CartPage = () => {
   const { items } = useContext(cartContext);
-  console.log(items);
+  const [orderConfirmation, setOrderConfirmation] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Calculate the item total using reduce
+  const handleOrder = async () => {
+    setIsLoading(true);
+
+    const token = localStorage.getItem("authToken");
+    const maxTime = Math.max(...items.map((item) => item.time || 30));
+
+    const orderData = {
+      cartItems: items.map((item) => ({
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        cuisine: item.cuisine,
+        time: item.time,
+        quantity: item.quantity,
+        totalPrice: item.price * item.quantity,
+      })),
+      totalAmount: total,
+      estimatedTime: maxTime,
+    };
+
+    console.log("Order data being sent:", orderData);
+
+    try {
+      const response = await fetch("http://localhost:3000/api/users/order", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setOrderConfirmation({
+          orderToken: data.data.orderToken,
+          items: orderData.cartItems,
+          totalAmount: total,
+          estimatedTime: maxTime,
+        });
+
+        items.length = 0;
+      } else {
+        throw new Error(data.message || "Failed to place order");
+      }
+    } catch (error) {
+      alert("Failed to place order: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const itemTotal = items.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -75,14 +129,29 @@ const CartPage = () => {
               </div>
             </div>
 
-            <button className="px-16 py-3 my-5 text-3xl bg-[#472C9D] text-white rounded-3xl">
-              Order
+            <button
+              className={`px-16 py-3 my-5 text-3xl ${
+                isLoading ? "bg-gray-400" : "bg-[#472C9D]"
+              } text-white rounded-3xl`}
+              onClick={handleOrder}
+              disabled={isLoading}
+            >
+              {isLoading ? "Placing Order..." : "Order"}
             </button>
             <NavLink to="/homepage">
               <button className="text-lg font-light">Back to menu</button>
             </NavLink>
           </div>
         </div>
+      )}
+      {orderConfirmation && (
+        <OrderConfirmation
+          orderDetails={orderConfirmation}
+          onClose={() => {
+            setOrderConfirmation(null);
+            navigate("/homepage");
+          }}
+        />
       )}
     </div>
   );

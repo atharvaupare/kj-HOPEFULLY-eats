@@ -2,7 +2,6 @@
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-import loremPicsum from "lorem-picsum";
 import { useContext, useState } from "react";
 import cartContext from "../../context/cartContext";
 

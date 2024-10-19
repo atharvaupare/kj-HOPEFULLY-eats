@@ -26,7 +26,7 @@ const cartItemSchema = new mongoose.Schema({
   totalPrice: {
     type: Number,
     required: true, // price * quantity
-  },
+  }
 });
 
 const orderSchema = new mongoose.Schema({
@@ -39,6 +39,10 @@ const orderSchema = new mongoose.Schema({
   totalAmount: {
     type: Number,
     required: true,
+  },
+  estimatedTime: { 
+    type: Number,
+    required: true
   },
   status: {
     type: String,

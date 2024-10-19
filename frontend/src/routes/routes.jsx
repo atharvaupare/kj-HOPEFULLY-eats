@@ -1,5 +1,5 @@
 import Landing from "../pages/Landing";
-import HomePage from "../pages/HomePage"
+import HomePage from "../pages/HomePage";
 import MainMenu from "../pages/MainMenu";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
@@ -7,6 +7,7 @@ import ProfilePage from "../pages/ProfilePage";
 import SearchPage from "../pages/SearchPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import MyOrders from "../components/MyOrders";
 
 const routes = [
   {
@@ -27,19 +28,23 @@ const routes = [
     children: [
       {
         path: "",
-        element: <MainMenu />, 
+        element: <MainMenu />,
       },
       {
         path: "search/:text?",
-        element: <SearchPage />, 
+        element: <SearchPage />,
       },
       {
         path: "profile",
-        element: <ProfilePage />, 
+        element: <ProfilePage />,
       },
       {
         path: "cart",
-        element: <CartPage />, 
+        element: <CartPage />,
+      },
+      {
+        path: "profile/orders",
+        element: <MyOrders />,
       },
     ],
   },

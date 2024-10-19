@@ -1,7 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import Snackbar from "../components/Snackbar";
 import { useState } from "react";
 
 const LoginPage = () => {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -43,9 +45,12 @@ const LoginPage = () => {
 
         if (response.ok && data.status === "success") {
           localStorage.setItem("authToken", data.token);
-          console.log(data.token);  
           console.log("Login successful");
-          navigate("/homepage");
+          setSnackbarOpen(true);
+          setTimeout
+          setTimeout(() => {
+            navigate("/homepage");
+          }, 1000);
         } else {
           setErrors({
             submit: data.message || "Invalid email or password",
@@ -200,6 +205,11 @@ const LoginPage = () => {
           </div>
         </form>
       </div>
+      <Snackbar
+        message="Successfully logged in"
+        open={snackbarOpen}
+        onClose={() => setSnackbarOpen(false)}
+      />
     </section>
   );
 };

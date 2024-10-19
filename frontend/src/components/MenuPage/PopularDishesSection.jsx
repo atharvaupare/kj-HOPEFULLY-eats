@@ -123,6 +123,8 @@ const PopularDishesSection = ({ selectedCuisine }) => {
         dish => dish.attributes.cuisine.data.attributes.name === selectedCuisine
       );
 
+    console.log(filteredDisplayedDishes);
+    
   return (
     <div className="w-full">
       {filteredDisplayedDishes.length === 0 && !loading ? (
@@ -147,6 +149,7 @@ const PopularDishesSection = ({ selectedCuisine }) => {
                 image={dish.attributes.image.data.attributes}
                 description={dish.attributes.description}
                 rating={dish.attributes.rating}
+                time={dish.attributes.time}
                 dish={dish}
               />
             </div>

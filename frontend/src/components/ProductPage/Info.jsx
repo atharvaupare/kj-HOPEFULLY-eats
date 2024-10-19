@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddOnCard from "./AddOnCard";
 import loremPicsum from "lorem-picsum";
 import cartContext from "../../context/cartContext";
@@ -13,6 +13,7 @@ const Info = ({
   setCounter,
   price,
   name,
+  time,
   image,
   description,
   rating,
@@ -24,9 +25,10 @@ const Info = ({
 
   function handleCartAddition() {
     console.log(image);
-    addItem((prev) => [...prev, { name, price, quantity: counter, image }]);
+    addItem((prev) => [...prev, { name, price, time, quantity: counter, image }]);
     navigate("/homepage");
   }
+  console.log(time);
 
   return (
     <div className="w-full h-[600px] bg-white rounded-t-[60px] animate-fade-up">
@@ -39,7 +41,6 @@ const Info = ({
           Rs. {price}
         </div>
       </div>
-
       <div className="mt-1 w-full flex justify-between">
         <span className="text-2xl ml-5">{name}</span>
         <div className="mr-5 flex justify-center items-center gap-5">
@@ -59,9 +60,14 @@ const Info = ({
           />
         </div>
       </div>
-
       <div className="ml-5 text-sm text-[#595959]">
         <span>{description}</span>
+      </div>
+      <div className="flex items-center gap-2 mt-5 bg-white/10 px-4 py-2 rounded-full">
+        <AccessTimeIcon sx={{ color: "black", fontSize: 20 }} />
+        <span className="text-black text-sm font-medium">
+          {time} mins preparation time
+        </span>
       </div>
 
       <div className="ml-5 mt-5 flex flex-col">
@@ -72,7 +78,6 @@ const Info = ({
           <AddOnCard src={loremPicsum({ width: 60 })}></AddOnCard>
         </div>
       </div>
-
       <div className="w-full flex justify-center mt-3">
         <button
           className="px-10 py-3 my-5 text-xl bg-[#472C9D] text-white rounded-3xl"
