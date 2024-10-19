@@ -5,11 +5,21 @@ import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import ProfilePage from "../pages/ProfilePage";
 import SearchPage from "../pages/SearchPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const routes = [
   {
     path: "/",
     element: <Landing />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
   },
   {
     path: "/homepage",

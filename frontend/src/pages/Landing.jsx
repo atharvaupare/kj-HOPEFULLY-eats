@@ -16,7 +16,7 @@ const Landing = () => {
             <h1>KJ</h1>
             <h1>Eats.</h1>
           </div>
-          <NavLink to="/homepage">
+          <NavLink to="/login">
             <button
               className="rounded-md bg-white text-[#462b9c] text-xl py-2 px-5 cursor-pointer hover:scale-105 hover:bg-[#462b9c] hover:text-white"
               type="button"
