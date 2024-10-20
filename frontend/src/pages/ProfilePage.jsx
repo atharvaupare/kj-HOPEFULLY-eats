@@ -49,7 +49,7 @@ const ProfilePage = () => {
         } else {
           setError(data.message || "Failed to fetch profile data");
         }
-      } catch (err) {
+      } catch {
         setError("An error occurred while fetching the profile.");
       }
     };
@@ -88,7 +88,7 @@ const ProfilePage = () => {
       <ProfileDisplayTag name={profileData.name} email={profileData.email} />
 
       <div className="flex flex-col items-center w-full mt-5">
-        <NavLink to="/homepage/profile/orders" className="w-full flex justify-center">
+        <NavLink to="/orders" className="w-full flex justify-center">
           <ProfileInfoTag
             head="My Orders"
             desc="See all your orders"
