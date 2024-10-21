@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 dotenv.config(); // Load environment variables
 
@@ -22,6 +23,7 @@ app.use(express.json());
 // Define routes
 app.use("/api/auth", authRoutes); // Authentication routes
 app.use("/api/users", userRoutes); // User-related routes
+app.use("/api/admin", adminRoutes)
 
 // Health Check Route
 app.get("/", (req, res) => {

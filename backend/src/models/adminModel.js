@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -22,18 +22,14 @@ const userSchema = new mongoose.Schema(
         type: String,
         required: true
       }
-    }],
-    orders: {
-      type: [String],
-    },
+    }]
   },
   {
     timestamps: true,
   }
 );
 
-// Pre-save middleware to hash the password before saving it
-userSchema.pre("save", async function (next) {
+adminSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
@@ -47,10 +43,10 @@ userSchema.pre("save", async function (next) {
 });
 
 // Compare entered password with hashed password in the database
-userSchema.methods.matchPassword = async function (enteredPassword) {
+adminSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-const User = mongoose.model("User", userSchema);
+const Admin = mongoose.model("Admin", adminSchema);
 
-module.exports = User;
+module.exports = Admin;

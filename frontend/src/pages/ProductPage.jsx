@@ -51,6 +51,7 @@ const ProductPage = () => {
         image={imageUrl}
         description={description}
         rating={rating}
+        returnPath={returnPath}
       />
     </div>
   );

@@ -17,6 +17,7 @@ const Info = ({
   image,
   description,
   rating,
+  returnPath
 }) => {
   const { addItem } = useContext(cartContext);
   const navigate = useNavigate();
@@ -26,9 +27,10 @@ const Info = ({
   function handleCartAddition() {
     console.log(image);
     addItem((prev) => [...prev, { name, price, time, quantity: counter, image }]);
-    navigate("/homepage");
+    if(returnPath){
+      navigate(returnPath);
+    } else navigate("/homepage");
   }
-  console.log(time);
 
   return (
     <div className="w-full h-[600px] bg-white rounded-t-[60px] animate-fade-up">
