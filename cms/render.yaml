@@ -24,4 +24,3 @@ services:
         generateValue: true
       - key: APP_KEYS
         generateValue: true
-    path: ./cms
