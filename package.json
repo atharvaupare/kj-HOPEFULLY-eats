@@ -1,0 +1,14 @@
+{
+  "name": "kj-hopefully-eats",
+  "version": "1.0.0",
+  "description": "Project to automate running frontend, backend and cms",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && nodemon server.js",
+    "cms": "cd cms && npm run develop",
+    "start-all": "start cmd /k \"npm run frontend\" && start cmd /k \"npm run backend\" && start cmd /k \"npm run cms\""
+  },
+  "author": "",
+  "license": "ISC"
+}
