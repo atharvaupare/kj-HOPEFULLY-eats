@@ -91,6 +91,7 @@ const Table = ({
 
       return () => clearInterval(intervalId); // Clean up on component unmount
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminToken, navigate, selectedStatus]);
 
   const getStatusClass = (status) => {

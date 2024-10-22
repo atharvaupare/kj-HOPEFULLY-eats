@@ -4,12 +4,17 @@ import io from "socket.io-client";
 import { useState, useEffect } from "react";
 import Toast from "../components/Toast";
 import ClipLoader from "react-spinners/ClipLoader";
+import notif from "../assets/notif.mp3"
 
 const HomePage = () => {
   const [user, setUser] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [socket, setSocket] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  const playSound = ()=>{
+    new Audio(notif).play();
+  }
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
@@ -37,6 +42,7 @@ const HomePage = () => {
         message: data.message,
         status: data.newStatus,
       };
+      playSound();
       setNotifications((prev) => [...prev, newNotification]);
     });
 

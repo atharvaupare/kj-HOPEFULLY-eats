@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DinnerDiningOutlinedIcon from "@mui/icons-material/DinnerDiningOutlined";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { Collapse } from "@mui/material";
+import OrderConfirmation from "./OrderConfirmation";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -43,9 +44,10 @@ const MyOrders = () => {
         });
 
         const ordersData = await Promise.all(orderPromises);
+        ordersData.reverse();
         setOrders(ordersData);
         setIsLoading(false);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch orders");
         setIsLoading(false);
       }
@@ -54,100 +56,100 @@ const MyOrders = () => {
     fetchOrders();
   }, []);
 
-  const formatRemainingTime = (estimatedTime, orderTime) => {
-    const timePassed = (Date.now() - new Date(orderTime).getTime()) / 60000; // Convert to minutes
-    const timeLeft = estimatedTime - timePassed;
-
-    return timeLeft > 0 ? `${Math.floor(timeLeft)} mins left` : "Order Ready";
-  };
-
   const toggleOrderDetails = (index) => {
     setExpandedOrderIndex(expandedOrderIndex === index ? null : index); // Toggle the clicked order
   };
 
   function handleBack() {
-    navigate("/homepage/profile")
+    navigate("/homepage/profile");
   }
 
+  const displayTime = (orderTime) => {
+    const now = new Date();
+    const orderDate = new Date(orderTime);
+
+    const diffInMs = now - orderDate;
+    const diffInSeconds = Math.floor(diffInMs / 1000);
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+    const diffInMonths = Math.floor(diffInDays / 30);
+    const diffInYears = Math.floor(diffInMonths / 12);
+
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} seconds ago`;
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes} minutes ago`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours} hours ago`;
+    } else if (diffInDays < 30) {
+      return `${diffInDays} days ago`;
+    } else if (diffInMonths < 12) {
+      return `${diffInMonths} months ago`;
+    } else {
+      return `${diffInYears} years ago`;
+    }
+  };
+
   return (
-    <div className="w-full h-full bg-gray-50 p-5">
-      <h1 className="text-3xl font-bold mb-5 text-gray-800">My Orders</h1>
-      <button
-        onClick={handleBack}
-        className="mt-5 mb-10 self-start bg-transparent border-none cursor-pointer"
-      >
-        <ArrowBackIosNewOutlinedIcon sx={{ color: "black", fontSize: 20 }} />
-      </button>
-      {isLoading ? (
-        <p className="text-gray-600">Loading your orders...</p>
-      ) : error ? (
-        <p className="text-red-500">{error}</p>
-      ) : orders.length === 0 ? (
-        <p className="text-gray-600">No orders found.</p>
-      ) : (
-        <div className="flex flex-col gap-5">
-          {orders.map((order, index) => (
-            <div
-              key={index}
-              className="bg-white p-4 border border-gray-300 rounded-lg shadow-md transition-all duration-300"
-            >
+    <div className="w-full h-full flex flex-col items-center bg-gray-50 p-5 overflow-hidden overflow-y-auto mb-20">
+      <div className="w-[95%] h-[80px] top-1 flex justify-between items-center bg-gradient-to-b from-[#462b9c] to-[#644ab5] rounded-xl text-white fixed">
+        <button
+          onClick={handleBack}
+          className="self-start ml-5 bg-transparent border-none cursor-pointer h-full"
+        >
+          <ArrowBackIosNewOutlinedIcon sx={{ color: "white", fontSize: 20 }} />
+        </button>
+        <div className="flex gap-3 w-full justify-center">
+          <h1 className="text-3xl font-semibold">My Orders</h1>
+          <DinnerDiningOutlinedIcon sx={{ fontSize: 40 }} />
+        </div>
+      </div>
+
+      <div className="mt-[80px] w-[90%]">
+        {isLoading ? (
+          <p className="text-gray-600">Loading your orders...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : orders.length === 0 ? (
+          <p className="text-gray-600">No orders found.</p>
+        ) : (
+          <div className="w-full flex flex-col gap-5">
+            {orders.map((order, index) => (
               <div
-                className="flex justify-between items-center cursor-pointer"
-                onClick={() => toggleOrderDetails(index)}
+                key={index}
+                className="w-full bg-white p-4 border border-gray-300 rounded-lg shadow-md transition-all duration-300"
               >
-                <div>
-                  <h2 className="text-lg font-semibold text-gray-700">
-                    Order #{order.data.orderToken}
-                  </h2>
-                  <p className="text-gray-600">
-                    Total Amount: Rs. {order.data.totalAmount}
-                  </p>
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleOrderDetails(index)}
+                >
+                  <div>
+                    <h2 className="text-lg font-semibold text-gray-700">
+                      {displayTime(order.data.orderDate)}
+                    </h2>
+                    <p className="text-gray-600">
+                      Total Amount: Rs. {order.data.totalAmount}
+                    </p>
+                  </div>
+                  {expandedOrderIndex === index ? (
+                    <ExpandLessIcon className="text-gray-500" />
+                  ) : (
+                    <ExpandMoreIcon className="text-gray-500" />
+                  )}
                 </div>
-                {expandedOrderIndex === index ? (
-                  <ExpandLessIcon className="text-gray-500" />
-                ) : (
-                  <ExpandMoreIcon className="text-gray-500" />
+
+                {expandedOrderIndex === index && (
+                  <OrderConfirmation
+                    orderDetails={order.data}
+                    onClose={() => setExpandedOrderIndex(-1)}
+                  />
                 )}
               </div>
-
-              <Collapse in={expandedOrderIndex === index}>
-                <div className="mt-4">
-                  <p className="font-medium text-gray-600">Items:</p>
-                  <ul className="mb-4">
-                    {order.data.cartItems.map((item, i) => (
-                      <li key={i} className="flex items-center gap-4 mb-2">
-                        <img
-                          src={item.image}
-                          alt=""
-                          className="w-12 h-12 object-cover rounded-md border"
-                        />
-                        <div>
-                          <p className="text-gray-700">{item.name}</p>
-                          <p className="text-sm text-gray-600">
-                            Rs. {item.price} x {item.quantity} = Rs.{" "}
-                            {item.totalPrice}
-                          </p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="font-medium text-gray-600">
-                    Estimated Time:{" "}
-                    {formatRemainingTime(
-                      order.data.estimatedTime,
-                      order.data.orderDate
-                    )}
-                  </p>
-                  <p className="font-medium text-gray-600">
-                    Status:{" "}
-                    {order.data.estimatedTime > 0 ? "Ongoing" : "Completed"}
-                  </p>
-                </div>
-              </Collapse>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

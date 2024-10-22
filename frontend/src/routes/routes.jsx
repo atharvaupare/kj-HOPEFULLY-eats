@@ -48,6 +48,10 @@ const routes = [
         path: "cart",
         element: <CartPage />,
       },
+      {
+        path: "profile/orders",
+        element: <MyOrders />,
+      }
     ],
   },
   {
@@ -58,10 +62,6 @@ const routes = [
     path: "/item/:name/:price",
     element: <ProductPage />,
   },
-  {
-    path: "/orders",
-    element: <MyOrders />,
-  }
 ];
 
 export default routes;

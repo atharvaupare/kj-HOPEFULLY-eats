@@ -47,7 +47,7 @@ const BottomNav = () => {
       </NavLink>
 
       <NavLink to="/homepage/profile">
-        {location.pathname == "/homepage/profile" ? (
+        {location.pathname.match(/^\/homepage\/profile(\/.*)?$/) ? (
           <PersonOutlinedIcon sx={{ fontSize: 32, color: "#462B9C" }} />
         ) : (
           <PersonOutlinedIcon sx={{ fontSize: 32, color: "#9D9C9C" }} />

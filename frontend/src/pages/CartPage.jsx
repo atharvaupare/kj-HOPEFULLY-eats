@@ -46,12 +46,13 @@ const CartPage = () => {
       });
 
       const data = await response.json();
-
+      
       if (response.ok) {
         setOrderConfirmation({
           orderToken: data.data.orderToken,
-          items: orderData.cartItems,
+          cartItems: orderData.cartItems,
           totalAmount: total,
+          orderDate: data.data.orderDate,
           estimatedTime: maxTime,
         });
 

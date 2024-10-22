@@ -88,7 +88,7 @@ const ProfilePage = () => {
       <ProfileDisplayTag name={profileData.name} email={profileData.email} />
 
       <div className="flex flex-col items-center w-full mt-5">
-        <NavLink to="/orders" className="w-full flex justify-center">
+        <NavLink to="/homepage/profile/orders" className="w-full flex justify-center">
           <ProfileInfoTag
             head="My Orders"
             desc="See all your orders"
