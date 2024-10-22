@@ -5,9 +5,10 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 import { useContext, useState } from "react";
 import cartContext from "../../context/cartContext";
 
-const CartItem = ({ name, price, quantity, image }) => {
+const CartItem = ({ name, price, quantity, image, addOns }) => {
   console.log(image);
   const { addItem } = useContext(cartContext);
+  const [showAddOns, setShowAddOns] = useState(false);
   const [count, setCount] = useState(quantity);
 
   function handleQuantityRemoval() {
@@ -58,8 +59,28 @@ const CartItem = ({ name, price, quantity, image }) => {
           </div>
         </div>
       </div>
-      <div className="m-5" onClick={handleDelete}>
-        <CancelOutlinedIcon sx={{ color: "red" }} />
+      <div className="flex flex-col items-end h-full justify-around cursor-pointer">
+        {addOns.length > 0 && (
+          <div
+            className="relative"
+            onMouseEnter={() => setShowAddOns(true)}
+            onMouseLeave={() => setShowAddOns(false)}
+          >
+            <span>AddOns: {addOns.length}</span>
+            {showAddOns && (
+              <div className="absolute bg-white border border-gray-300 rounded-lg shadow-lg p-2 mt-1 z-10">
+                <ul>
+                  {addOns.map((addOn, index) => (
+                    <li key={index} className="text-gray-700">
+                      {addOn}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+        <CancelOutlinedIcon sx={{ color: "red" }} onClick={handleDelete} />
       </div>
     </div>
   );

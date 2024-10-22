@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DinnerDiningOutlinedIcon from "@mui/icons-material/DinnerDiningOutlined";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import OrderConfirmation from "./OrderConfirmation";
 
 const MyOrders = () => {
@@ -132,11 +130,6 @@ const MyOrders = () => {
                       Total Amount: Rs. {order.data.totalAmount}
                     </p>
                   </div>
-                  {expandedOrderIndex === index ? (
-                    <ExpandLessIcon className="text-gray-500" />
-                  ) : (
-                    <ExpandMoreIcon className="text-gray-500" />
-                  )}
                 </div>
 
                 {expandedOrderIndex === index && (

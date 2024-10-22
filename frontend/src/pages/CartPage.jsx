@@ -28,6 +28,7 @@ const CartPage = () => {
         time: item.time,
         quantity: item.quantity,
         totalPrice: item.price * item.quantity,
+        // addOns: items.addOns
       })),
       totalAmount: total,
       estimatedTime: maxTime,
@@ -96,6 +97,7 @@ const CartPage = () => {
               quantity={item.quantity}
               key={key}
               image={item.image}
+              addOns={item.addOns}
             />
           ))}
 

@@ -2,10 +2,12 @@
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import Cheese from "../../assets/cheese.webp";
+import greenChutney from "../../assets/greenChutney.jpg";
+import ketchup from "../../assets/ketchup.webp";
 import AddOnCard from "./AddOnCard";
-import loremPicsum from "lorem-picsum";
 import cartContext from "../../context/cartContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Info = ({
@@ -17,17 +19,21 @@ const Info = ({
   image,
   description,
   rating,
-  returnPath
+  returnPath,
 }) => {
   const { addItem } = useContext(cartContext);
+  const [selectedAddOn, setSelectedAddOn] = useState([]);
   const navigate = useNavigate();
 
   // console.log(image);
 
   function handleCartAddition() {
     console.log(image);
-    addItem((prev) => [...prev, { name, price, time, quantity: counter, image }]);
-    if(returnPath){
+    addItem((prev) => [
+      ...prev,
+      { name, price, time, quantity: counter, image, addOns: selectedAddOn },
+    ]);
+    if (returnPath) {
       navigate(returnPath);
     } else navigate("/homepage");
   }
@@ -73,11 +79,26 @@ const Info = ({
       </div>
 
       <div className="ml-5 mt-5 flex flex-col">
-        <h3 className="text-lg">Add Ons</h3>
+        <h3 className="text-lg font-normal">Add Ons</h3>
         <div className="flex justify-evenly mt-2">
-          <AddOnCard src={loremPicsum({ width: 60 })}></AddOnCard>
-          <AddOnCard src={loremPicsum({ width: 60 })}></AddOnCard>
-          <AddOnCard src={loremPicsum({ width: 60 })}></AddOnCard>
+          <AddOnCard
+            name={"cheese"}
+            src={Cheese}
+            selectedAddOn={selectedAddOn}
+            setSelectedAddOn={setSelectedAddOn}
+          ></AddOnCard>
+          <AddOnCard
+            name={"chutney"}
+            src={greenChutney}
+            selectedAddOn={selectedAddOn}
+            setSelectedAddOn={setSelectedAddOn}
+          ></AddOnCard>
+          <AddOnCard
+            name={"ketchup"}
+            src={ketchup}
+            selectedAddOn={selectedAddOn}
+            setSelectedAddOn={setSelectedAddOn}
+          ></AddOnCard>
         </div>
       </div>
       <div className="w-full flex justify-center mt-3">
