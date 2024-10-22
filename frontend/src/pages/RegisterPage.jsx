@@ -66,6 +66,9 @@ const RegisterPage = () => {
           if (data.token) {
             localStorage.setItem("authToken", data.token);
           }
+          if (data.userId) {
+            localStorage.setItem("userId", data.userId);
+          }
           console.log("Registration successful");
           navigate("/homepage");
         } else {

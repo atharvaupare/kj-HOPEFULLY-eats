@@ -44,7 +44,10 @@ const LoginPage = () => {
         const data = await response.json();
 
         if (response.ok && data.status === "success") {
+          console.log(data.userId);
+          
           localStorage.setItem("authToken", data.token);
+          localStorage.setItem("userId", data.userId);
           console.log("Login successful");
           setSnackbarOpen(true);
           setTimeout

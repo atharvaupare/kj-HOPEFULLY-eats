@@ -49,11 +49,12 @@ const registerUser = async (req, res) => {
     // Generate token
     const token = await generateToken(user);
 
-    // Send response
+    // Send response including user ID
     res.status(201).json({
       status: "success",
       message: "User registered successfully",
       token,
+      userId: user._id, // Send userId in the response
     });
   } catch (error) {
     console.error("Error Registering User:", error);
@@ -89,6 +90,7 @@ const loginUser = async (req, res) => {
         status: "success",
         message: "Login successful",
         token,
+        userId: user._id, // Send userId in the response
       });
     } else {
       res

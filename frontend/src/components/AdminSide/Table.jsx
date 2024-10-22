@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import io from "socket.io-client";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+const socket = io.connect("http://localhost:3000");
 
 const Table = ({
   adminToken,
@@ -42,7 +45,7 @@ const Table = ({
     }
   };
 
-  const updateOrderStatus = async (orderToken, newStatus) => {
+  const updateOrderStatus = async (userName, orderToken, newStatus, userId) => {
     try {
       newStatus = newStatus.toLowerCase();
       const response = await axios.post(
@@ -52,6 +55,11 @@ const Table = ({
           headers: { Authorization: `Bearer ${adminToken}` },
         }
       );
+      socket.emit("send_message", { 
+        room: userId,  // Add the room parameter
+        message: `${userName}, your order is ${newStatus}`,
+        newStatus: newStatus
+      });
       fetchOrders(page);
       alert(response.data.message);
     } catch (error) {
@@ -140,7 +148,7 @@ const Table = ({
                 <select
                   value={order.status}
                   onChange={(e) =>
-                    updateOrderStatus(order.orderToken, e.target.value)
+                    updateOrderStatus(order.user.name, order.orderToken, e.target.value, order.user._id)
                   }
                   className="px-3 py-2 border rounded-lg"
                 >

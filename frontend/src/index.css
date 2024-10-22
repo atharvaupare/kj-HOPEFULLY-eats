@@ -29,3 +29,13 @@
   transform: translateY(-10%);
   transition: all 300ms;
 }
+
+/* Notification Styling */
+.notification {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.notification-show {
+  opacity: 1;
+}

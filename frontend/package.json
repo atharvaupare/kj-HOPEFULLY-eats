@@ -19,8 +19,10 @@
     "lucide-react": "^0.453.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.26.1",
     "react-spinners": "^0.14.1",
+    "socket.io-client": "^4.8.0",
     "tailwindcss-animated": "^1.1.2"
   },
   "devDependencies": {
