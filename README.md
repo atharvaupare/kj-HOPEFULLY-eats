@@ -39,20 +39,23 @@ git clone <repository-url>
 cd <project-directory>
 ```
 
-2. ``` bash
+2.
+ ``` bash
    cd frontend
    npm i
    npm run dev
-   ```
+```
 
-3. ``` bash
+3.
+``` bash
    cd backend
    npm i
    node server.js
-   ```
+```
 
-4. ``` bash
+4.
+``` bash
    cd cms
    npm i
    npm run develop
-  ```
+```
