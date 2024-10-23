@@ -25,8 +25,6 @@ const Info = ({
   const [selectedAddOn, setSelectedAddOn] = useState([]);
   const navigate = useNavigate();
 
-  // console.log(image);
-
   function handleCartAddition() {
     console.log(image);
     addItem((prev) => [
@@ -39,7 +37,7 @@ const Info = ({
   }
 
   return (
-    <div className="w-full h-[600px] bg-white rounded-t-[60px] animate-fade-up">
+    <div className="w-full h-full overflow-auto bg-white rounded-t-[60px] animate-fade-up">
       <div className="flex justify-between items-center mb-5">
         <div className="px-4 ml-5 mt-3 h-[50px] bg-[#472C9D] text-white rounded-[30px] flex gap-2 justify-center items-center">
           <div className="text-xl">⭐</div>
@@ -49,6 +47,7 @@ const Info = ({
           Rs. {price}
         </div>
       </div>
+
       <div className="mt-1 w-full flex justify-between">
         <span className="text-2xl ml-5">{name}</span>
         <div className="mr-5 flex justify-center items-center gap-5">
@@ -68,9 +67,11 @@ const Info = ({
           />
         </div>
       </div>
+
       <div className="ml-5 text-sm text-[#595959]">
         <span>{description}</span>
       </div>
+
       <div className="flex items-center gap-2 mt-5 bg-white/10 px-4 py-2 rounded-full">
         <AccessTimeIcon sx={{ color: "black", fontSize: 20 }} />
         <span className="text-black text-sm font-medium">
@@ -101,7 +102,9 @@ const Info = ({
           ></AddOnCard>
         </div>
       </div>
-      <div className="w-full flex justify-center mt-3">
+
+      {/* Ensure button visibility */}
+      <div className="w-full flex justify-center mt-3 sticky bottom-0 bg-white pt-3">
         <button
           className="px-10 py-3 my-5 text-xl bg-[#472C9D] text-white rounded-3xl"
           onClick={handleCartAddition}

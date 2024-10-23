@@ -4,7 +4,7 @@ import Table from "../components/AdminSide/Table";
 
 const AdminSide = () => {
   const navigate = useNavigate();
-  const [selectedOrder, setSelectedOrder] = useState(null); 
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [userOrders, setUserOrders] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("Pending");
 
@@ -15,7 +15,6 @@ const AdminSide = () => {
     localStorage.removeItem("adminToken");
     navigate("/adminlogin");
   };
-
 
   return (
     <div className="w-screen h-screen bg-gray-100 p-8">
@@ -95,21 +94,21 @@ const AdminSide = () => {
 
       {/* User Orders Modal */}
       {userOrders && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
-            <h3 className="text-xl mb-4">User Order History</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col">
+          <h3 className="text-xl mb-4 sticky top-0 bg-white p-4 border">
+            User Order History
+          </h3>
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full h-3/4 overflow-y-auto no-scrollbar">
             {userOrders.map((order) => (
-              <div key={order._id} className="mb-4">
+              <div key={order._id} className="mb-4 border-b pb-4">
                 <p>Order Token: {order.orderToken}</p>
-                <p>Status: {order.status}</p>
                 <p>Total Amount: Rs. {order.totalAmount}</p>
                 <p>
                   Dishes:{" "}
                   {order.cartItems
                     .map((item) => `${item.name} (${item.quantity})`)
                     .join(", ")}
-                </p>{" "}
-                {/* Update this line */}
+                </p>
               </div>
             ))}
             <button

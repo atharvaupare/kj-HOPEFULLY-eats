@@ -10,6 +10,7 @@ import RegisterPage from "../pages/RegisterPage";
 import MyOrders from "../components/MyOrders";
 import AdminLogin from "../pages/AdminLogin";
 import AdminSide from "../pages/AdminSide";
+import EditProfile from "../pages/EditProfile";
 
 const routes = [
   {
@@ -51,6 +52,10 @@ const routes = [
       {
         path: "profile/orders",
         element: <MyOrders />,
+      },
+      {
+        path: "profile/edit",
+        element: <EditProfile />,
       }
     ],
   },

@@ -1,5 +1,7 @@
 const User = require("../models/userModel");
 const Order = require("../models/orderModel");
+const sharp = require('sharp');
+const bcrypt = require('bcryptjs');
 
 // Get user profile
 const getUserProfile = async (req, res) => {
@@ -34,31 +36,58 @@ const updateUserProfile = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.user.email });
 
-    if (user) {
-      user.email = user.email;
-      user.mobileNo = req.body.mobileNo || user.mobileNo;
-
-      const updatedUser = await user.save();
-
-      res.status(200).json({
-        status: "success",
-        message: "User profile updated successfully",
-        data: updatedUser,
-      });
-    } else {
-      res.status(404).json({
+    if (!user) {
+      return res.status(404).json({
         status: "fail",
         message: "User not found",
       });
     }
+
+    if (req.body.name) {
+      user.name = req.body.name;
+    }
+
+    if (req.body.password) {
+      const hashedPassword = await bcrypt.hash(req.body.password, 8);
+      user.password = hashedPassword;
+    }
+
+    if (req.file) {
+      try {
+        const buffer = await sharp(req.file.buffer)
+          .resize({ width: 250, height: 250 })
+          .png()
+          .toBuffer();
+        user.avatar = buffer;
+      } catch (error) {
+        console.error('Error processing image:', error);
+        return res.status(400).json({
+          status: "fail",
+          message: "Error processing image file"
+        });
+      }
+    }
+
+    await user.save();
+
+    // Send success response
+    return res.status(200).json({
+      status: "success",
+      message: "Profile updated successfully",
+      data: {
+        name: user.name,
+        email: user.email
+      }
+    });
+
   } catch (error) {
-    res.status(500).json({
+    console.error('Profile update error:', error);
+    return res.status(500).json({
       status: "fail",
-      message: "Server error while updating user profile",
+      message: error.message || "Server error while updating user profile"
     });
   }
 };
-
 const placeOrder = async (req, res) => {
   try {
     const { cartItems, totalAmount, estimatedTime } = req.body; // Add estimatedTime

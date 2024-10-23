@@ -5,6 +5,7 @@ import CuisineButton from "../components/MenuPage/CuisineButton";
 import SpecialBanner from "../components/MenuPage/SpecialBanner";
 import PopularDishesSection from "../components/MenuPage/PopularDishesSection";
 import AllImage from "../assets/all.webp";
+import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const MainMenu = () => {
@@ -67,15 +68,18 @@ const MainMenu = () => {
         <PopularDishesSection selectedCuisine={selectedOption} />
       </div>
 
-      <div className="w-full flex justify-center transition-all hover:scale-105">
-        <button className="p-3 bg-[#4c2fab] rounded-full text-white text-lg">Explore our menu</button>
-      </div>
+      <NavLink to="/homepage/search">
+        <div className="w-full flex justify-center transition-all hover:scale-105">
+          <button className="p-3 bg-[#4c2fab] rounded-full text-white text-lg">
+            Explore our menu
+          </button>
+        </div>
+      </NavLink>
     </div>
   );
 };
 
 const CuisineWrapper = ({ name, selected = false, set, image }) => {
-  // console.log(image);
   return (
     <div
       className="flex flex-col items-center gap-1 flex-shrink-0"

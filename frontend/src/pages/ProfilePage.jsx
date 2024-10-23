@@ -62,7 +62,7 @@ const ProfilePage = () => {
     setSnackbarOpen(true);
     setTimeout(() => {
       navigate("/login");
-    }, 1000); // Redirect to login after 1 second
+    }, 1000);
   };
 
   if (error) {
@@ -81,11 +81,13 @@ const ProfilePage = () => {
     return <div>Loading...</div>; // Show loading state until data is fetched
   }
 
+  console.log(profileData);
+  
   return (
     <div className="w-full h-full flex flex-col items-center bg-[#F5F5F5] overflow-y-auto no-scrollbar">
       <h2 className="text-3xl self-start m-5">Profile</h2>
 
-      <ProfileDisplayTag name={profileData.name} email={profileData.email} />
+      <ProfileDisplayTag name={profileData.name} email={profileData.email} avatar={profileData.avatar}/>
 
       <div className="flex flex-col items-center w-full mt-5">
         <NavLink to="/homepage/profile/orders" className="w-full flex justify-center">

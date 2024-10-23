@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema(
     orders: {
       type: [String],
     },
+    avatar: {
+      type: Buffer
+    }
   },
   {
     timestamps: true,

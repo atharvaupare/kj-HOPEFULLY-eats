@@ -83,7 +83,7 @@ const CartPage = () => {
 
       {items.length === 0 ? (
         <button
-          className="w-fit px-10 py-3 my-5 text-2xl bg-[#472C9D] text-white rounded-3xl"
+          className="w-fit px-10 py-3 my-5 text-xl bg-[#472C9D] text-white rounded-3xl"
           onClick={() => navigate("/homepage")}
         >
           Add some items
